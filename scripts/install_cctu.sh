@@ -9,7 +9,7 @@ R -q -e "remotes::install_github(repo=\"shug0131/cctu\", ref=\"$CCTU_VERSION\" )
 
 # The GSL package requires this, and MICE needs gsl. I think Ubuntu:latest doesn't have it
 # so the devel version fails to build
-apt-get install -y --no-install-recommends  libgsl0-dev
+apt-get install -y --no-install-recommends  gsl-bin
 
 install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS" \
     kableExtra \
