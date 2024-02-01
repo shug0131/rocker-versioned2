@@ -68,7 +68,7 @@ tlmgr install \
     geometry \
     gettitlestring \
     grfext \
-    helvetica \
+    helvetic \
     hycolor \
     hyperref \
     inconsolata \
