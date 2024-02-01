@@ -51,6 +51,7 @@ tlmgr update --self
 tlmgr install latex-bin luatex xetex
 tlmgr install \
     ae \
+    amsfonts \
     amsmath \
     auxhook \
     bibtex \
@@ -66,6 +67,8 @@ tlmgr install \
     framed \
     geometry \
     gettitlestring \
+    grfext \
+    helvetica \
     hycolor \
     hyperref \
     inconsolata \
@@ -82,6 +85,7 @@ tlmgr install \
     mdwtools \
     metafont \
     mfware \
+    natbib \
     parskip \
     pdfcrop \
     pdfescape \
@@ -91,6 +95,7 @@ tlmgr install \
     stringenc \
     tex \
     tikzfill \
+    times \
     tools \
     uniquecounter \
     url \
