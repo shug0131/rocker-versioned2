@@ -14,7 +14,7 @@ function apt_install() {
 }
 
 apt_install \
-    tcl
+    tk
 
 
 install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS"  xslt

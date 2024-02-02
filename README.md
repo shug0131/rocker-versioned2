@@ -4,9 +4,9 @@
 
 [![license](https://img.shields.io/badge/license-GPLv2-blue.svg)](https://opensource.org/licenses/GPL-2.0)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Update container definition files](https://github.com/rocker-org/rocker-versioned2/actions/workflows/dockerfiles.yml/badge.svg)](https://github.com/rocker-org/rocker-versioned2/actions/workflows/dockerfiles.yml)
-[![Build & Push Core images](https://github.com/rocker-org/rocker-versioned2/actions/workflows/core.yml/badge.svg)](https://github.com/rocker-org/rocker-versioned2/actions/workflows/core.yml)
-[![Build & Push R devel images and RStudio daily build images](https://github.com/rocker-org/rocker-versioned2/actions/workflows/devel.yml/badge.svg)](https://github.com/rocker-org/rocker-versioned2/actions/workflows/devel.yml)
+[![Update container definition files](https://github.com/shug0131/rocker-versioned2/actions/workflows/dockerfiles.yml/badge.svg)](https://github.com/shug0131/rocker-versioned2/actions/workflows/dockerfiles.yml)
+[![Build & Push Core images](https://github.com/shug0131/rocker-versioned2/actions/workflows/core.yml/badge.svg)](https://github.com/shug0131/rocker-versioned2/actions/workflows/core.yml)
+[![Build & Push R devel images and RStudio daily build images](https://github.com/shug0131/rocker-versioned2/actions/workflows/devel.yml/badge.svg)](https://github.com/shug0131/rocker-versioned2/actions/workflows/devel.yml)
 
 <!-- badges: end -->
 
@@ -37,19 +37,22 @@ Compared to `r-base`, this stack:
   This setting ensures that the same version of the R package is installed no matter when the installation is performed.
   - In addition to CRAN mirror, the version of RStudio Server installed in `rocker/rstudio` and
     the date of CTAN mirror set in `rocker/verse` are also fixed.
-    Please check [the document about versions](https://github.com/rocker-org/rocker-versioned2/wiki/Versions) for details.
+    Please check [the document about versions](https://github.com/shug0131/rocker-versioned2/wiki/Versions) for details.
 - Provides images that are generally smaller than the `r-base` series.
+- This modification from rocker-org, also runs make install-tests,  and set the test directory for full read/write/execute permissions for all to allow
+[installation testing](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Testing-a-Unix_002dalike-Installation)
 
-_Note: This repository is for R >= 4.0.0 images.
-For images with R <= 3.6.3, please see the [`rocker-versioned`](https://github.com/rocker-org/rocker-versioned) repository,
-or the [`shiny`](https://github.com/rocker-org/shiny), [`geospatial`](https://github.com/rocker-org/geospatial),
-and [`binder`](https://github.com/rocker-org/binder) repositories._
+_Note: This repository is for R >= 4.3.0 images.
+
+- The `verse` is modified to install `collections` of extra latex packages and fonts in line with the suggestions for texlive made in the [manual](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Essential-programs-and-libraries)
+
+The image `shug0131\cctu` builds on `verse` to add in some further routinely used packages  and an in-house package from github.  It also installs [tcltk functionality](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Tcl_002fTk) (as per the  requirements for installation testing)
 
 ## Pre-built images
 
-The following images have been built and are available on DockerHub or [GitHub Container Registry](https://github.com/orgs/rocker-org/packages?repo_name=rocker-versioned2).
+The following images have been built and are available on DockerHub or [GitHub Container Registry](https://github.com/orgs/shug0131/packages?repo_name=rocker-versioned2).
 
-For more information about these container images, please see [the Wiki of this repository](https://github.com/rocker-org/rocker-versioned2/wiki).
+For more information about these container images, please see [the Wiki of this repository](https://github.com/shug0131/rocker-versioned2/wiki).
 
 ### Image list
 
@@ -57,7 +60,7 @@ Check [the Rocker project site](https://rocker-project.org/images/#the-versioned
 
 ### Tags
 
-Check [the Wiki](https://github.com/rocker-org/rocker-versioned2/wiki) for the list of tags.
+Check [the Wiki](https://github.com/shug0131/rocker-versioned2/wiki) for the list of tags.
 
 #### Spacial tags for daily builds
 
@@ -65,17 +68,11 @@ There are also special tags that are not listed in the wiki, `devel` and `latest
 The GitHub Actions workflow build and push these images daily.
 
 - The `devel` images are based on `ubuntu:latest` (the latest Ubuntu LTS version) and install [the latest R-devel daily snapshot](https://cloud.r-project.org/src/base-prerelease/).
-  `devel` tag is vailable for `rocker/r-ver`, `rocker/rstudio`, `rocker/tidyverse`, `rocker/verse`.
-- The `latest-daily` tag images are based on `rocker/r-ver:latest` and install [the latest RStudio daily build](https://dailies.rstudio.com/).
-  `latest-daily` tag is available for `rocker/rstudio`, `rocker/tidyverse`, `rocker/verse`.
+  `devel` tag is vailable for `shug0131/r-ver`, `shug0131/rstudio`, `shug0131/tidyverse`, `shug0131/verse`, `shug0131/cctu`.
+- The `latest-daily` tag images are based on `shug0131/r-ver:latest` and install [the latest RStudio daily build](https://dailies.rstudio.com/).
+  `latest-daily` tag is available for `shug0131/rstudio`, `shug0131/tidyverse`, `shug0131/verse`, `shug0131/cctu`.
 
-#### Spacial tags for geospatial toolkit
 
-`rocker/geospatial:ubuntugis` (`rocker/geospatial:X.Y.Z-ubuntugis`) and `rocker/geospatial:dev-osgeo` are special images
-that differ slightly from the regular `rocker/geospatial`.
-
-- `ubuntugis` is built on packages installed from [the ubuntugis-unstable PPA](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable).
-- `dev-osgeo` is built on the latest release of [PROJ](https://proj.org/), [GDAL](https://gdal.org/), and [GEOS](https://libgeos.org/).
 
 ## Modifying and extending images
 
@@ -88,7 +85,7 @@ and use `apt` only to install necessary system libraries (e.g. `libxml2`).
 Do not use `apt install r-cran-*` to install R packages.
 
 If you would prefer to install only the latest verions of packages from pre-built binaries using `apt`,
-consider using `r-base` or [`rocker/r-bspm`](https://github.com/rocker-org/bspm) instead.
+consider using `r-base` or [`rocker/r-bspm`](https://github.com/shug0131/bspm) instead.
 
 ### Rocker scripts
 
@@ -146,10 +143,6 @@ when the Dockerfiles are updated, they are immediately built by GitHub Actions.
 
 Non-latest R version images will be built when a new R version is released.
 At this time, a tag and a GitHub release will also be created.
-
-## Contributing
-
-Please check <https://github.com/rocker-org/rocker/wiki/How-to-contribute>.
 
 ## License
 
