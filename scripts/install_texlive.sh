@@ -51,13 +51,17 @@ tlmgr update --self
 tlmgr install latex-bin luatex xetex
 tlmgr install \
     ae \
-    amsfonts \
     amsmath \
     auxhook \
     bibtex \
     bigintcalc \
     bitset \
     bookmark \
+    collection-latex \
+    collection-fontsrecommended \
+    collection-latexrecommended \
+    collection-fontsextra \
+    collection-latexextra \
     context \
     ec \
     epstopdf-pkg \
@@ -67,8 +71,6 @@ tlmgr install \
     framed \
     geometry \
     gettitlestring \
-    grfext \
-    helvetic \
     hycolor \
     hyperref \
     inconsolata \
@@ -85,7 +87,6 @@ tlmgr install \
     mdwtools \
     metafont \
     mfware \
-    natbib \
     parskip \
     pdfcrop \
     pdfescape \
@@ -95,7 +96,6 @@ tlmgr install \
     stringenc \
     tex \
     tikzfill \
-    times \
     tools \
     uniquecounter \
     url \
