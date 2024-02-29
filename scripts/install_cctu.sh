@@ -14,7 +14,8 @@ function apt_install() {
 }
 
 apt_install \
-    tk
+    tk\
+    gsl
 
 
 install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS"  xslt
@@ -37,10 +38,11 @@ install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS" \
     eudract \
     ordinal \
     consort \
-    coxme 
-    
-install2.r --error  --skipmissing --deps FALSE --skipinstalled -n "$NCPUS" \   
+    coxme \
     mice
+    
+#install2.r --error  --skipmissing --deps FALSE --skipinstalled -n "$NCPUS" \   
+#    mice
 
 #   Hmisc \ # frnak harrells package of stuff
 #   mfp \ # fractional polynomials
