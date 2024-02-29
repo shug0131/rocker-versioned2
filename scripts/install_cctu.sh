@@ -15,8 +15,9 @@ function apt_install() {
 
 apt_install \
     tk\
-    gsl-bin
-    
+    gsl-bin\
+    libgsl-dev
+
 
 
 install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS"  xslt
