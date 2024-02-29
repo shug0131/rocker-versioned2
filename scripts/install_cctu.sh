@@ -37,8 +37,11 @@ install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS" \
     eudract \
     ordinal \
     consort \
-    coxme \
+    coxme 
+    
+install2.r --error  --skipmissing --deps FALSE --skipinstalled -n "$NCPUS" \   
     mice
+
 #   Hmisc \ # frnak harrells package of stuff
 #   mfp \ # fractional polynomials
 #  stan packages ?? seem to be there as dependencies..somewhere
