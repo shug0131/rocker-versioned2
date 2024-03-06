@@ -26,13 +26,7 @@
       },
       "tags": [
         "docker.io/shug0131/r-ver:4.3.2",
-        "ghcr.io/shug0131/r-ver:4.3.2",
-        "docker.io/shug0131/r-ver:4.3",
-        "ghcr.io/shug0131/r-ver:4.3",
-        "docker.io/shug0131/r-ver:4",
-        "ghcr.io/shug0131/r-ver:4",
-        "docker.io/shug0131/r-ver:latest",
-        "ghcr.io/shug0131/r-ver:latest"
+        "ghcr.io/shug0131/r-ver:4.3.2"
       ],
       "platforms": [
         "linux/amd64"
@@ -55,13 +49,7 @@
       },
       "tags": [
         "docker.io/shug0131/rstudio:4.3.2",
-        "ghcr.io/shug0131/rstudio:4.3.2",
-        "docker.io/shug0131/rstudio:4.3",
-        "ghcr.io/shug0131/rstudio:4.3",
-        "docker.io/shug0131/rstudio:4",
-        "ghcr.io/shug0131/rstudio:4",
-        "docker.io/shug0131/rstudio:latest",
-        "ghcr.io/shug0131/rstudio:latest"
+        "ghcr.io/shug0131/rstudio:4.3.2"
       ],
       "platforms": [
         "linux/amd64"
@@ -84,13 +72,7 @@
       },
       "tags": [
         "docker.io/shug0131/tidyverse:4.3.2",
-        "ghcr.io/shug0131/tidyverse:4.3.2",
-        "docker.io/shug0131/tidyverse:4.3",
-        "ghcr.io/shug0131/tidyverse:4.3",
-        "docker.io/shug0131/tidyverse:4",
-        "ghcr.io/shug0131/tidyverse:4",
-        "docker.io/shug0131/tidyverse:latest",
-        "ghcr.io/shug0131/tidyverse:latest"
+        "ghcr.io/shug0131/tidyverse:4.3.2"
       ],
       "platforms": [
         "linux/amd64"
@@ -113,13 +95,7 @@
       },
       "tags": [
         "docker.io/shug0131/verse:4.3.2",
-        "ghcr.io/shug0131/verse:4.3.2",
-        "docker.io/shug0131/verse:4.3",
-        "ghcr.io/shug0131/verse:4.3",
-        "docker.io/shug0131/verse:4",
-        "ghcr.io/shug0131/verse:4",
-        "docker.io/shug0131/verse:latest",
-        "ghcr.io/shug0131/verse:latest"
+        "ghcr.io/shug0131/verse:4.3.2"
       ],
       "platforms": [
         "linux/amd64"
@@ -142,13 +118,7 @@
       },
       "tags": [
         "docker.io/shug0131/cctu:4.3.2",
-        "ghcr.io/shug0131/cctu:4.3.2",
-        "docker.io/shug0131/cctu:4.3",
-        "ghcr.io/shug0131/cctu:4.3",
-        "docker.io/shug0131/cctu:4",
-        "ghcr.io/shug0131/cctu:4",
-        "docker.io/shug0131/cctu:latest",
-        "ghcr.io/shug0131/cctu:latest"
+        "ghcr.io/shug0131/cctu:4.3.2"
       ],
       "platforms": [
         "linux/amd64"

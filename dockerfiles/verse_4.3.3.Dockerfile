@@ -1,4 +1,4 @@
-FROM shug0131/tidyverse:latest-daily
+FROM shug0131/tidyverse:4.3.3
 
 LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
       org.opencontainers.image.source="https://github.com/rocker-org/rocker-versioned2" \
