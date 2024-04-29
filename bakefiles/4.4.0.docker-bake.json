@@ -1,0 +1,164 @@
+{
+  "group": [
+    {
+      "default": [
+        {
+          "targets": [
+            "r-ver",
+            "rstudio",
+            "tidyverse",
+            "verse",
+            "cctu"
+          ]
+        }
+      ]
+    }
+  ],
+  "target": {
+    "r-ver": {
+      "context": "./",
+      "dockerfile": "dockerfiles/r-ver_4.4.0.Dockerfile",
+      "labels": {
+        "org.opencontainers.image.title": "shug0131/r-ver",
+        "org.opencontainers.image.description": "Reproducible builds to fixed version of R",
+        "org.opencontainers.image.base.name": "docker.io/library/ubuntu:jammy",
+        "org.opencontainers.image.version": "R-4.4.0"
+      },
+      "tags": [
+        "docker.io/shug0131/r-ver:4.4.0",
+        "ghcr.io/shug0131/r-ver:4.4.0",
+        "docker.io/shug0131/r-ver:4.4",
+        "ghcr.io/shug0131/r-ver:4.4",
+        "docker.io/shug0131/r-ver:4",
+        "ghcr.io/shug0131/r-ver:4",
+        "docker.io/shug0131/r-ver:latest",
+        "ghcr.io/shug0131/r-ver:latest"
+      ],
+      "platforms": [
+        "linux/amd64"
+      ],
+      "cache-from": [
+        "docker.io/shug0131/r-ver:4.4.0"
+      ],
+      "cache-to": [
+        "type=inline"
+      ]
+    },
+    "rstudio": {
+      "context": "./",
+      "dockerfile": "dockerfiles/rstudio_4.4.0.Dockerfile",
+      "labels": {
+        "org.opencontainers.image.title": "shug0131/rstudio",
+        "org.opencontainers.image.description": "RStudio Server with fixed version of R",
+        "org.opencontainers.image.base.name": "docker.io/shug0131/r-ver:4.4.0",
+        "org.opencontainers.image.version": "R-4.4.0"
+      },
+      "tags": [
+        "docker.io/shug0131/rstudio:4.4.0",
+        "ghcr.io/shug0131/rstudio:4.4.0",
+        "docker.io/shug0131/rstudio:4.4",
+        "ghcr.io/shug0131/rstudio:4.4",
+        "docker.io/shug0131/rstudio:4",
+        "ghcr.io/shug0131/rstudio:4",
+        "docker.io/shug0131/rstudio:latest",
+        "ghcr.io/shug0131/rstudio:latest"
+      ],
+      "platforms": [
+        "linux/amd64"
+      ],
+      "cache-from": [
+        "docker.io/shug0131/rstudio:4.4.0"
+      ],
+      "cache-to": [
+        "type=inline"
+      ]
+    },
+    "tidyverse": {
+      "context": "./",
+      "dockerfile": "dockerfiles/tidyverse_4.4.0.Dockerfile",
+      "labels": {
+        "org.opencontainers.image.title": "shug0131/tidyverse",
+        "org.opencontainers.image.description": "Version-stable build of R, RStudio Server, and R packages.",
+        "org.opencontainers.image.base.name": "docker.io/shug0131/rstudio:4.4.0",
+        "org.opencontainers.image.version": "R-4.4.0"
+      },
+      "tags": [
+        "docker.io/shug0131/tidyverse:4.4.0",
+        "ghcr.io/shug0131/tidyverse:4.4.0",
+        "docker.io/shug0131/tidyverse:4.4",
+        "ghcr.io/shug0131/tidyverse:4.4",
+        "docker.io/shug0131/tidyverse:4",
+        "ghcr.io/shug0131/tidyverse:4",
+        "docker.io/shug0131/tidyverse:latest",
+        "ghcr.io/shug0131/tidyverse:latest"
+      ],
+      "platforms": [
+        "linux/amd64"
+      ],
+      "cache-from": [
+        "docker.io/shug0131/tidyverse:4.4.0"
+      ],
+      "cache-to": [
+        "type=inline"
+      ]
+    },
+    "verse": {
+      "context": "./",
+      "dockerfile": "dockerfiles/verse_4.4.0.Dockerfile",
+      "labels": {
+        "org.opencontainers.image.title": "shug0131/verse",
+        "org.opencontainers.image.description": "Adds tex & related publishing packages to version-locked tidyverse image.",
+        "org.opencontainers.image.base.name": "docker.io/shug0131/tidyverse:4.4.0",
+        "org.opencontainers.image.version": "R-4.4.0"
+      },
+      "tags": [
+        "docker.io/shug0131/verse:4.4.0",
+        "ghcr.io/shug0131/verse:4.4.0",
+        "docker.io/shug0131/verse:4.4",
+        "ghcr.io/shug0131/verse:4.4",
+        "docker.io/shug0131/verse:4",
+        "ghcr.io/shug0131/verse:4",
+        "docker.io/shug0131/verse:latest",
+        "ghcr.io/shug0131/verse:latest"
+      ],
+      "platforms": [
+        "linux/amd64"
+      ],
+      "cache-from": [
+        "docker.io/shug0131/verse:4.4.0"
+      ],
+      "cache-to": [
+        "type=inline"
+      ]
+    },
+    "cctu": {
+      "context": "./",
+      "dockerfile": "dockerfiles/cctu_4.4.0.Dockerfile",
+      "labels": {
+        "org.opencontainers.image.title": "shug0131/cctu",
+        "org.opencontainers.image.description": "Docker-based image for CCTU specific use, built on versioned Rocker image.",
+        "org.opencontainers.image.base.name": "docker.io/shug0131/verse:4.4.0",
+        "org.opencontainers.image.version": "R-4.4.0"
+      },
+      "tags": [
+        "docker.io/shug0131/cctu:4.4.0",
+        "ghcr.io/shug0131/cctu:4.4.0",
+        "docker.io/shug0131/cctu:4.4",
+        "ghcr.io/shug0131/cctu:4.4",
+        "docker.io/shug0131/cctu:4",
+        "ghcr.io/shug0131/cctu:4",
+        "docker.io/shug0131/cctu:latest",
+        "ghcr.io/shug0131/cctu:latest"
+      ],
+      "platforms": [
+        "linux/amd64"
+      ],
+      "cache-from": [
+        "docker.io/shug0131/cctu:4.4.0"
+      ],
+      "cache-to": [
+        "type=inline"
+      ]
+    }
+  }
+}
