@@ -98,5 +98,5 @@ List of 2
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  1.54 0.091 1.607 0.009 0 
+Time elapsed:  1.541 0.166 1.694 0.009 0 
 > 

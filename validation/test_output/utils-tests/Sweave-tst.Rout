@@ -135,5 +135,5 @@ R> tools::texi2pdf(sub("Rnw$","tex", f))# used to fail
 R> 
 R> 
 R> cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.444 0.037 1.915 1.197 0.168 
+Time elapsed:  0.45 0.025 1.91 1.24 0.14 
 R> 

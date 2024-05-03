@@ -30,12 +30,12 @@ Type 'q()' to quit R.
 > 
 > system.time(print(levelplot(z ~ x * y, foo, contour = TRUE)))
    user  system elapsed 
-  0.132   0.004   0.136 
+  0.153   0.000   0.173 
 > 
 > system.time(print(levelplot(z ~ x * y, foo, contour = TRUE,
 +                             panel = panel.levelplot.raster)))
    user  system elapsed 
-  0.062   0.001   0.061 
+  0.064   0.000   0.065 
 Warning message:
 In (function (x, y, z, subscripts, at = pretty(z), ..., col.regions = regions$col,  :
   'x' values are not equispaced; output may be wrong
@@ -43,7 +43,7 @@ In (function (x, y, z, subscripts, at = pretty(z), ..., col.regions = regions$co
 > system.time(print(levelplot(z ~ x * y, foo, contour = TRUE,
 +                             region.type = "contour")))
    user  system elapsed 
-  0.593   0.028   0.621 
+  0.607   0.026   0.637 
 > 
 > levelplot(z ~ x * y, subset(foo, z > 150), contour = T)
 > 

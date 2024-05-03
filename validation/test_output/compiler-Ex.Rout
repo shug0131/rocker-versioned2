@@ -101,7 +101,7 @@ list(.Code, list(12L, GETVAR.OP, 1L, LDCONST.OP, 2L, ADD.OP,
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.852 0.007 1.862 0 0 
+Time elapsed:  1.862 0.011 1.875 0 0 
 > grDevices::dev.off()
 null device 
           1 

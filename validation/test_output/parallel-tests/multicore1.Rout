@@ -23,16 +23,16 @@ Type 'q()' to quit R.
 +     parallel:::mcexit(,"I was a child")
 + }
 > cat("I'm the master\n")
+I'm the master
+> unserialize(parallel:::readChildren(1.5))
 > if (inherits(p, "masterProcess")) {
 +     cat("I'm a child! ", Sys.getpid(), "\n")
 +     parallel:::mcexit(,"I was a child")
 + }
-I'm the master
-> unserialize(parallel:::readChildren(1.5))
-I'm a child!  87720 
+I'm a child!  13074 
 [1] "I was a child"
 > ## don't do anything here as stdin is eaten.
 > 
 > proc.time()
    user  system elapsed 
-  0.238   0.076   0.218 
+  0.215   0.081   0.312 

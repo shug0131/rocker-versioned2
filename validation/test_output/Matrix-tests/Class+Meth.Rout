@@ -339,7 +339,7 @@ Virtual class "packedMatrix"
 ---
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for the above "part I"
-Time elapsed:  1.821 0.16 1.882 0.008 0 
+Time elapsed:  1.886 0.139 2.086 0.007 0.001 
 > 
 > 
 > if(doExtras && !interactive()) { # don't want to see on source()

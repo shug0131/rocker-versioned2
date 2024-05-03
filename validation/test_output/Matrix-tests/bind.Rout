@@ -202,7 +202,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time (user system elapsed): 0.17 0.008 0.178 
+Time (user system elapsed): 0.175 0.012 0.195 
 > 
 > ## lgeMatrix -- rbind2() had bug (in C code):
 > is.lge <- function(M) isValid(M, "lgeMatrix")
@@ -245,7 +245,7 @@ Time (user system elapsed): 0.17 0.008 0.178
 + 	  identical(.tCRT(d4), cbind(Diagonal(4),     0:3)),
 + 	  identical(.tCRT(m4), rbind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time (user system elapsed): 0.095 0.004 0.099 
+Time (user system elapsed): 0.099 0.004 0.107 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -293,7 +293,7 @@ rbind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 cbind (m, v= 1:0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rbind (m, v= 1:0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 > showProc.time()
-Time (user system elapsed): 0.098 0.008 0.111 
+Time (user system elapsed): 0.101 0.004 0.106 
 > 
 > cbind(0, mC); cbind(mC, 0)
 4 x 7 sparse Matrix of class "dgCMatrix"
@@ -538,5 +538,5 @@ v5    .    |    .    |    .
 > 
 > options(op)
 > showProc.time()
-Time (user system elapsed): 0.244 0.004 0.249 
+Time (user system elapsed): 0.251 0 0.251 
 > 

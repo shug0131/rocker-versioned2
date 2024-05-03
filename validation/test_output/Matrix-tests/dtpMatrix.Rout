@@ -144,5 +144,5 @@ attr(,"class")
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  2.201 0.21 2.333 0.008 0.001 
+Time elapsed:  2.302 0.221 2.221 0.009 0 
 > 

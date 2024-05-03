@@ -1065,7 +1065,7 @@ Available components:
 [11] "data"       
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.078 0.022 0.163 0 0 
+Time elapsed:  0.077 0.019 0.099 0 0 
 > data(chorSub)
 > p4cl <- pam(chorSub, k = 4, cluster.only = TRUE)
 > ## The first two are "completely fuzzy" -- and now give a warnings
@@ -1344,5 +1344,5 @@ attr(,"legend")
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.224 0.029 0.567 0 0 
+Time elapsed:  0.228 0.019 0.254 0 0 
 > 

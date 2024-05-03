@@ -30,7 +30,7 @@ Reference class object of class "envRefClass"
 > be <- baseenv()
 > system.time(stopifnot(all.equal(be,be)))## <- takes a few sec's
    user  system elapsed 
-  0.001   0.000   0.001 
+  0.001   0.000   0.000 
 > stopifnot(
 +     grepl("not identical.*character", print(all.equal(rp, ner))),
 +     grepl("not identical.*character", print(all.equal(ner, rp))))
@@ -43,5 +43,5 @@ Reference class object of class "envRefClass"
 > 
 > proc.time()
    user  system elapsed 
-  0.286   0.090   0.262 
+  0.271   0.110   0.272 
 > 

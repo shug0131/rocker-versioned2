@@ -356,5 +356,5 @@ Type 'q()' to quit R.
 + }
 > 
 > cat("Time elapsed:", proc.time(), "\n") # "stats"
-Time elapsed: 2.317 0.166 2.409 0.006 0.002 
+Time elapsed: 2.361 0.143 2.42 0.007 0.002 
 > 

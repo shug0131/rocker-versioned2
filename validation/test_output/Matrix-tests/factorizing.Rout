@@ -39,13 +39,13 @@ doExtras: FALSE ;  is64bit: TRUE
 > 
 > (cS <- system.time(Sq <- qr(mm))) # 0.009
    user  system elapsed 
-  0.008   0.000   0.008 
+  0.009   0.000   0.008 
 > (cD <- system.time(Dq <- qr(md))) # 0.499 (lynne, 2014 f); 1.04 lynne 2019 ?????
    user  system elapsed 
-  0.435   0.013   0.454 
+  0.432   0.008   0.440 
 > cD[1] / cS[1] # dense is  much ( ~ 100--170 times) slower
 user.self 
-   54.375 
+       48 
 > 
 > ## chkQR() in ../inst/test-tools-1.R ;
 > 
@@ -2946,12 +2946,12 @@ Warning in qr2rankMatrix(qrZ.) :
 119: dim(M) = 34x29, rank=25, k=      Inf; super= FALSE M:  M': super= TRUE M:  M':  [Ok]
 120: dim(M) = 48x18, rank=18, k=    7.804; super= FALSE M:  M': super= TRUE M:  M':  [Ok]
 Time    user  system elapsed 
-Time   1.924   0.032   1.985 
+Time   1.909   0.024   1.948 
 > 
 > .updateCHMfactor
 function (object, parent, mult = 0) 
 .Call(CHMfactor_update, object, parent, mult)
-<bytecode: 0x560ed5a12878>
+<bytecode: 0x55e9c57dc8a8>
 <environment: namespace:Matrix>
 > ## TODO: (--> ../TODO "Cholesky"):
 > ## ----
@@ -3069,7 +3069,7 @@ function (a, b, ...)
     }
     .local(a, b = b, ...)
 }
-<bytecode: 0x560ecf4d0288>
+<bytecode: 0x55e9bf29a2b8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -3241,5 +3241,5 @@ Bunch-Kaufman factorization of Formal class 'BunchKaufman' [package "Matrix"] wi
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  9.339 0.353 9.829 0.008 0.001 
+Time elapsed:  9.241 0.463 9.493 0.009 0 
 > 

@@ -38,10 +38,10 @@ current .Random.seed :
 + } else { # remove it
 +     rm(.Random.seed)
 + }
-[1] 0.4035701
+[1] 0.2791492
 > s2 <- check.RS()
 current .Random.seed :
- int [1:626] 10403 1 -854874720 2029187683 1381806849 -1134974352 1984579086 -1695773063 15358475 1077842746 ...
+ int [1:626] 10403 1 2130696822 -711844448 -1707668893 2136742657 -756067728 -35123698 -275298695 679801355 ...
 Error in cleanup(kill = tools::SIGKILL, detach = TRUE, shutdown = TRUE) : 
   object 'C_mc_cleanup' not found
 Calls: <Anonymous> -> cleanup

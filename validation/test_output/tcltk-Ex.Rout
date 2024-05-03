@@ -57,9 +57,9 @@ Warning in fun(libname, pkgname) : couldn't connect to display ":0"
 > f <- function() cat("HI!\n")
 > ## IGNORE_RDIFF_BEGIN
 > .Tcl.callback(f)
-[1] "R_call 0x55961e8f32a0"
+[1] "R_call 0x56281dbee2d0"
 > .Tcl.args(text = "Push!", command = f) # NB: Different address
-[1] "-text \"Push!\" -command { R_call 0x55961e8f32a0 }"
+[1] "-text \"Push!\" -command { R_call 0x56281dbee2d0 }"
 > ## IGNORE_RDIFF_END
 > 
 > xyzzy <- tclVar(7913)
@@ -81,7 +81,7 @@ Warning in fun(libname, pkgname) : couldn't connect to display ":0"
 > ## IGNORE_RDIFF_BEGIN
 > ls(envir = .TkRoot$env, all.names = TRUE) # .Tcl.args put a callback ref in here
 [1] "TclVarCount"               "num.subwin"               
-[3] "{ R_call 0x55961e8f32a0 }"
+[3] "{ R_call 0x56281dbee2d0 }"
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -321,7 +321,7 @@ Warning in fun(libname, pkgname) : couldn't connect to display ":0"
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.133 0.013 0.163 0 0 
+Time elapsed:  0.118 0.031 0.164 0 0 
 > grDevices::dev.off()
 null device 
           1 

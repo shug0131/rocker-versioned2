@@ -85,7 +85,7 @@ boot.ci(boot.out = cd4.boot, conf = 0.9, type = c("norm", "basic",
 
 Intervals : 
 Level      Normal              Basic              Percentile     
-90%   ( 0.4146,  0.8660 )   ( 0.3945,  0.8755 )   ( 0.4400,  0.8878 )  
+90%   ( 0.5006,  0.8664 )   ( 0.5038,  0.8651 )   ( 0.4741,  0.8549 )  
 Calculations on Transformed Scale;  Intervals on Original Scale
 > stopCluster(cl)
 > 
@@ -93,4 +93,4 @@ Calculations on Transformed Scale;  Intervals on Original Scale
 > 
 > proc.time()
    user  system elapsed 
-  0.280   0.083   0.700 
+  0.244   0.104   1.358 

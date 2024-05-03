@@ -620,5 +620,5 @@ Asserted error: 'ts' object must have one or more observations
 > 
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  5.172 1.323 5.042 0 0 
+Time elapsed:  5.152 1.519 4.258 0 0 
 > 

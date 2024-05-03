@@ -141,7 +141,7 @@ $suitesparse
 +     ## identical(d4T, as(d4., "dsTMatrix")) # deprecated
 + })
 > showProc.time()
-Time (user system elapsed): 0.058 0.008 0.067 
+Time (user system elapsed): 0.054 0.004 0.059 
 > 
 > class(mN <-  Matrix(NA, 3,4)) # NA *is* logical
 [1] "lgeMatrix"
@@ -220,7 +220,7 @@ rectangle size 34.1 x 8.5 [pixels];  --> lwd :1
 > image(Z0) # had worked previously already
 rectangle size 38.2 x 9.6 [pixels];  --> lwd :1
 > showProc.time()
-Time (user system elapsed): 0.574 0.011 0.591 
+Time (user system elapsed): 0.585 0.02 0.624 
 > 
 > assertError( Matrix(factor(letters)) )
 > n.lsec <- length(.leap.seconds)# 27 (2017-07)
@@ -458,7 +458,7 @@ function (x, i, j, ..., drop = TRUE)
         } else x[.m2V(i)]
     }, stop(.subscript.invalid(i), domain = NA))
 }
-<bytecode: 0x55f6a8bcfba8>
+<bytecode: 0x563d2a33fbd8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -530,7 +530,7 @@ defined "sparseVector"  "index" "missing" "missing"
 > .Lm0 <- S.na != Matrix(0, 3, 4)
 > stopifnot(Q.eq(L, Ln0), identical(Ln0, .Lm0));  rm(Ln0, .Lm0)
 > showProc.time()
-Time (user system elapsed): 0.238 0.007 0.246 
+Time (user system elapsed): 0.235 0 0.238 
 > 
 > 
 > ### Unit-diagonal and unitriangular  {methods need diagU2N() or similar}
@@ -653,7 +653,7 @@ Method Definition:
 
 function (from, to = "denseMatrix", strict = TRUE) 
 .Call(R_Matrix_as_unpacked, from)
-<bytecode: 0x55f6aa388ed8>
+<bytecode: 0x563d2baf8f08>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -735,7 +735,7 @@ logical   50000
 > l0 <- as(as(Lrg, "lMatrix"), "CsparseMatrix") # lgC
 > d0 <- as(l0, "dMatrix")
 > showProc.time()
-Time (user system elapsed): 0.288 0.004 0.292 
+Time (user system elapsed): 0.294 0.004 0.302 
 > 
 > if(FALSE) { #_____________________ FIXME: Should use cholmod_l_*() everywhere (?)____
 + ## problem in  Csparse_to_dense :
@@ -761,7 +761,7 @@ Time (user system elapsed): 0.288 0.004 0.292
 > 
 > options(warn = 1) # Matrix 1.5-0 (Sep 2022): we now warn when lots of memory is used
 > (memGB <- Sys.memGB("MemFree")) # from test-tools-1.R, only works with /proc/*
-[1] 1.069824
+[1] 0.3460703
 > system.time( # ~10 sec.                            __vv__
 +     e1 <- if(doExtras && is.finite(memGB) && memGB > 30) { # need around 18 GB
 +               try(Lrg == Lrg)
@@ -777,7 +777,7 @@ Time (user system elapsed): 0.288 0.004 0.292
 +               ## and immediately errors if LONG_VECTORs are not available
 +           }) ## when it works, see
    user  system elapsed 
-  0.000   0.000   0.001 
+      0       0       0 
 > ## Warning in .sparse2dense(x) : sparse->dense coercion: allocating vector of size 9.3 GiB
 > ##  user  system elapsed
 > ## 6.812  10.744  17.612
@@ -800,7 +800,7 @@ Time (user system elapsed): 0.288 0.004 0.292
    user  system elapsed 
       0       0       0 
 > showProc.time()
-Time (user system elapsed): 0.421 0 0.421 
+Time (user system elapsed): 0.421 0.004 0.426 
 > 
 > RNGversion("3.6.0")# future proof
 > if(doExtras && is.finite(memGB) && memGB > 49) withAutoprint({
@@ -838,7 +838,7 @@ Time (user system elapsed): 0.421 0 0.421
 +     rm(SM, TM)
 + })
 > showProc.time()
-Time (user system elapsed): 0.002 0 0.002 
+Time (user system elapsed): 0.003 0 0.003 
 > 
 > ## Constructing *packed* dense symmetric (dsp*) | triangular (dtp*) Matrices:
 > if(doExtras && is.finite(memGB) && memGB > 35) withAutoprint({
@@ -964,7 +964,7 @@ row
   [2,] . . 2 . 1
   [3,] 2 . 1 . .
 > showProc.time()
-Time (user system elapsed): 0.15 0 0.15 
+Time (user system elapsed): 0.151 0 0.151 
 > 
 > ###--  Sparse Triangular :
 > 
@@ -986,7 +986,7 @@ Time (user system elapsed): 0.15 0 0.15
 > dimnames(t5) <- list(row=paste0("r",1:5), col=paste0("C.",1:5))
 > s5 <- symmpart(t5) # gave an error
 > showProc.time()
-Time (user system elapsed): 0.005 0 0.005 
+Time (user system elapsed): 0.004 0 0.005 
 > 
 > (t1 <- new("dtTMatrix", x= c(3,7), i= 0:1, j=3:2,
 +            Dim= as.integer(c(4,4))))
@@ -1046,7 +1046,7 @@ Time (user system elapsed): 0.005 0 0.005
 > stopifnot(identical3(D3, tril(D3), triu(D3)))
 > ## methods were missing
 > showProc.time()
-Time (user system elapsed): 0.063 0 0.064 
+Time (user system elapsed): 0.06 0 0.059 
 > 
 > ## as(<diag>, <anything>) :
 > str(cls <- names(getClass("Matrix")@subclasses))# all Matrix classes
@@ -1153,7 +1153,7 @@ dsparseMatrix : [Ok]
 > assert.EQ.mat(cu,  as(tu,"matrix"), tol=0)
 > assert.EQ.mat(cnu, as(tu,"matrix"), tol=0)
 > showProc.time()
-Time (user system elapsed): 0.156 0 0.156 
+Time (user system elapsed): 0.172 0 0.176 
 > 
 > C <- suppressWarnings(Matrix(c(0,1,0,0), 5,5)) + Diagonal(5)
 suboptimal 'Arith' implementation of  'dsC*  o  dsC*'
@@ -1216,7 +1216,7 @@ suboptimal 'Arith' implementation of  'dsC*  o  dsC*'
 + 	  ## no rounding error, since have iU@x * 8 is integer :
 + 	  identical(U, diagN2U(drop0(U.))))
 > showProc.time()
-Time (user system elapsed): 0.044 0 0.043 
+Time (user system elapsed): 0.05 0 0.051 
 > 
 > ## <sparse> o <numeric> (of length > 1):
 > stopifnotValid(tm <- tu * 1:8, "sparseMatrix")
@@ -1304,7 +1304,7 @@ Time (user system elapsed): 0.044 0 0.043
 > stopifnot(all.equal(triu(t4) + tril(t4), c4),
 +           all.equal(triu(tt) + tril(tt), c4))
 > showProc.time()
-Time (user system elapsed): 0.106 0 0.106 
+Time (user system elapsed): 0.118 0 0.12 
 > 
 > 
 > ###-- Numeric Dense: Crossprod & Solve
@@ -1367,7 +1367,7 @@ Formal class 'dpoMatrix' [package "Matrix"] with 5 slots
 +           identical(ss, sltlp),
 +           isValid(lp, "lsyMatrix"), lp@uplo == "U")
 > showProc.time()
-Time (user system elapsed): 0.087 0.022 0.063 
+Time (user system elapsed): 0.094 0.032 0.127 
 > 
 > ###-- more solve() methods  {was ./solve.R }
 > 
@@ -1451,7 +1451,7 @@ rectangle size 3.1 x 3.1 [pixels];  --> lwd :0.5
 [1] 3125 3125
 > system.time(IT3 <- solve(T3k))# incredibly fast
    user  system elapsed 
-  0.007   0.000   0.006 
+  0.006   0.000   0.011 
 > I. <- drop0(zapsmall(IT3 %*% T3k))
 > I.. <- diagN2U(I.)
 > I <- Diagonal(5^5)
@@ -1461,7 +1461,7 @@ rectangle size 3.1 x 3.1 [pixels];  --> lwd :0.5
 +           identical(as(I..,"diagonalMatrix"), I)
 +           )
 > showProc.time()
-Time (user system elapsed): 0.252 0.091 0.241 
+Time (user system elapsed): 0.302 0.032 0.377 
 > 
 > ## printSpMatrix() ;  "suppressing (columns | rows) .." {and do it correctly!}
 > IT3
@@ -19371,7 +19371,7 @@ sparse vector (nnz/length = 8/16) of class "isparseVector"
 + 	  ## sub-assigning into simple "numeric" with sparseVector index:
 + 	  )
 > showProc.time()
-Time (user system elapsed): 1.138 0.219 1.358 
+Time (user system elapsed): 1.159 0.211 1.392 
 > 
 > 
 > M <- Matrix(c(2:0,1),2); M. <- as(M, "sparseMatrix")
@@ -19485,7 +19485,7 @@ attr(,"package")
 +           is(D + tx, "dtrMatrix"), is(tx + D, "dtrMatrix"),
 +           is(ptx + D, "dtpMatrix"), is(D + ptx, "dtpMatrix"))
 > showProc.time()
-Time (user system elapsed): 0.182 0.032 0.152 
+Time (user system elapsed): 0.195 0.028 0.146 
 > 
 > 
 > ###-- dense nonzero pattern:
@@ -19550,7 +19550,7 @@ Formal class 'ngCMatrix' [package "Matrix"] with 5 slots
 [1,] TRUE  TRUE
 [2,] TRUE FALSE
 > showProc.time()
-Time (user system elapsed): 0.031 0.005 0.029 
+Time (user system elapsed): 0.025 0.016 0.026 
 > 
 > 
 > ###-- sparse nonzero pattern : ----------
@@ -20437,7 +20437,7 @@ Method Definition:
 
 function (from, to = "CsparseMatrix", strict = TRUE) 
 .Call(R_Matrix_as_Csparse, from)
-<bytecode: 0x55f6aa3854f8>
+<bytecode: 0x563d2baf5528>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -20514,7 +20514,7 @@ defined "Matrix"    "CsparseMatrix"
 +         stopifnot(all(r1 == s1))
 +     }
 > showProc.time()
-Time (user system elapsed): 0.332 0.057 0.39 
+Time (user system elapsed): 0.347 0.056 0.415 
 > 
 > ## large dimensions -- gave integer overflow
 > ## R-forge bug 6743 by Ariel Paulson
@@ -20653,7 +20653,7 @@ FALSE  TRUE
 > 
 > 
 > showProc.time()# == "stats"
-Time (user system elapsed): 0.086 0 0.086 
+Time (user system elapsed): 0.091 0 0.094 
 > 
 > cat("doExtras:",doExtras,"\n")
 doExtras: FALSE 
@@ -20772,7 +20772,7 @@ doExtras: FALSE
 +     ## even more cases (?)
 + })
 > showProc.time()
-Time (user system elapsed): 0.131 0 0.131 
+Time (user system elapsed): 0.14 0 0.141 
 > 
 > dn4 <- list(letters[1:4], LETTERS[1:4])
 > (D4n <- `dimnames<-`(D4, dn4))
@@ -20943,7 +20943,7 @@ d . . . 4
 +              p = c(0:2, 2L), i = 0:1, x = c(-Inf, Inf))
 > stopifnot(identical(is.infinite(x.inf), as(abs(x.inf) == Inf, "nMatrix")))
 > showProc.time()
-Time (user system elapsed): 0.096 0 0.096 
+Time (user system elapsed): 0.104 0 0.104 
 > 
 > ## C-level bugs in 1.5-0, detected by full CRAN (incl. ASAN) check
 > as(new("dgTMatrix"), "CsparseMatrix") # out-of-bounds access
@@ -24344,5 +24344,5 @@ loaded via a namespace (and not attached):
 Loading required namespace: sfsmisc
 Failed with error:  ‘there is no package called ‘sfsmisc’’
 > showProc.time()
-Time (user system elapsed): 2.325 0.115 2.453 
+Time (user system elapsed): 2.236 0.171 2.446 
 > 

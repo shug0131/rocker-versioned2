@@ -5096,7 +5096,7 @@ function (V)
         r[seq.int(from = 1L, by = p + 1L, length.out = p)] <- 1
     r
 }
-<bytecode: 0x5556e0a32f80>
+<bytecode: 0x561b5b517c68>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7720,7 +7720,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5556e01c3fc8>
+<environment: 0x561b5aca6c40>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12575,14 +12575,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x5556ddcab6a0>
-<environment: 0x5556ddcafe90>
+<bytecode: 0x561b56df7458>
+<environment: 0x561b569ff428>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x5556ddcab550>
-<environment: 0x5556ddcafe90>
+<bytecode: 0x561b56deda18>
+<environment: 0x561b569ff428>
 
 > 
 > 
@@ -16917,8 +16917,8 @@ Step function with continuity 'f'= 0.2 ,  3 knots at
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x5556ddf1fe90>
-<environment: 0x5556df6877a0>
+<bytecode: 0x561b58a02ec0>
+<environment: 0x561b5a11b578>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -19428,7 +19428,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  11.444 1.532 11.554 0 0 
+Time elapsed:  11.613 1.577 13.216 0 0 
 > grDevices::dev.off()
 null device 
           1 

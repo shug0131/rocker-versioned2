@@ -150,7 +150,7 @@ Asserted warning: variable 'Sex' is not a factor
 +                          m2 = list(random = ~ age | Subject), seed = 47)
 + )
    user  system elapsed 
-  0.213   0.070   0.157 
+  0.159   0.078   0.200 
 > ## the same, starting from two fitted models :
 > ort.S3 <- simulate(m3, m2 = m4, nsim = 3, seed = 47)
 > attr(ort.S3, "call") <- attr(orthS3, "call")

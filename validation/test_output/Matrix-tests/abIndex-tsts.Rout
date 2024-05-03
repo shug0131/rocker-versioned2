@@ -171,5 +171,5 @@ Formal class 'abIndex' [package "Matrix"] with 3 slots
 +                 allow.logical0=TRUE) # works also in R versions w/o it as formal argument
 +   }
 > cat('Time elapsed: ', (.pt <- proc.time()),'\n') # "stats"
-Time elapsed:  2.701 0.18 2.813 0.008 0 
+Time elapsed:  2.766 0.17 2.903 0.009 0 
 > 

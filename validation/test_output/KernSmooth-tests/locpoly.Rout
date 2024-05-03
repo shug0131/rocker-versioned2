@@ -1,0 +1,32 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## from Peter Dalgaard 2020-11-24
+> ## '(without the truncate=FALSE, curves pretty much go through
+> ##   the penultimate point, whatever reasonable bandwith is chosen.)'
+> 
+> library(KernSmooth)
+KernSmooth 2.23 loaded
+Copyright M. P. Wand 1997-2009
+> if(require("carData")) {
++ plot(prestige ~ income, data = Prestige)
++ with(Prestige, lines(locpoly(income, prestige, bandwidth = 5000)))
++ with(Prestige, lines(locpoly(income, prestige,
++                              bandwidth = 5000, truncate = FALSE)))
++ }
+Loading required package: carData
+> 

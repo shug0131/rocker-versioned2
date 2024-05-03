@@ -44,4 +44,4 @@ Calculations on Transformed Scale;  Intervals on Original Scale
 > 
 > proc.time()
    user  system elapsed 
-  0.389   0.105   0.383 
+  0.374   0.133   0.681 

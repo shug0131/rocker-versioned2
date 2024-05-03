@@ -474,7 +474,7 @@ y had  120  zero-columns
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  2.225 0.163 2.306 0.007 0.002 
+Time elapsed:  2.24 0.148 2.413 0.006 0.002 
 > 
 > if(!interactive()) warnings()
 > 

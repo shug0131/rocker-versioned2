@@ -81,7 +81,7 @@ Warning message:
 In Matrix(c(1, 0, 3, 0, 0, 5), 10, 10, sparse = TRUE) :
   data length [6] is not a sub-multiple or multiple of the number of rows [10]
 > (fname <- file.path(tempdir(), "kk.mm"))
-[1] "/tmp/RtmpyhYgTs/kk.mm"
+[1] "/tmp/RtmpD3tyBx/kk.mm"
 > writeMM(A, fname)
 NULL
 > (B  <- readMM(fname))

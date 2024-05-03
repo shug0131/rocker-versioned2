@@ -1948,7 +1948,7 @@ citing R packages.
 +          	citeNatbib(key, bib, mode = "numbers",
 +          	    bibpunct = c("[", "]", ";", "n", "", ","), ...)
 +          )
-<environment: 0x563e51c8c7e8>
+<environment: 0x55b27fc4a818>
 > cite("R, boot-package", refs, textual = TRUE)
 [1] "R Core Team [3]; Canty and Ripley [1]"
 > refs
@@ -1965,7 +1965,7 @@ Applications_. Cambridge University Press, Cambridge. ISBN
 > 
 > ## restore the old style
 > tools::bibstyle(savestyle, .default = TRUE)
-<environment: 0x563e525d9f68>
+<environment: 0x55b280597f98>
 > 
 > 
 > 
@@ -3226,7 +3226,7 @@ with value
 
 function (x, ...) 
 format(as.vector(x), ...)
-<bytecode: 0x563e575a3d70>
+<bytecode: 0x55b285561fe8>
 <environment: namespace:stats>
 > getAnywhere("simpleLoess") # not exported from stats
 A single object matching ‘simpleLoess’ was found
@@ -3376,7 +3376,7 @@ function (y, x, weights, span = 0.75, degree = 2L, parametric = FALSE,
                 1L) "gaussian" else "symmetric", trace.hat = trace.hat, 
             iterations = iterations), kd = if (surface == "interpolate") fit.kd))
 }
-<bytecode: 0x563e575cc330>
+<bytecode: 0x55b28558a5a8>
 <environment: namespace:stats>
 > argsAnywhere(format.dist)
 function (x, ...) 
@@ -3439,7 +3439,7 @@ function (fname, envir, warnS4only = TRUE)
     }
     isUME(body(f))
 }
-<bytecode: 0x563e5756c770>
+<bytecode: 0x55b28552a9e8>
 <environment: namespace:utils>
 > ## Not run: 
 > ##D fixInNamespace("predict.ppr", "stats")
@@ -3524,7 +3524,7 @@ function (object, newdata, ...)
             object$q), double(2 * object$smod[4L]))$y, ncol = object$q)
     drop(res)
 }
-<bytecode: 0x563e576b73d8>
+<bytecode: 0x55b285675650>
 <environment: namespace:stats>
 > 
 > 
@@ -3665,7 +3665,7 @@ function (object, newdata, ...)
 > ## Create a new empty hash table.
 > h1 <- hashtab()
 > h1
-<hashtable 0x563e57745d28: count = 0, type = "identical">
+<hashtable 0x55b285703fa0: count = 0, type = "identical">
 > 
 > ## Add some key/value pairs.
 > sethash(h1, NULL, 1)
@@ -3716,7 +3716,7 @@ NULL
 > gethash(h1, NULL)
 [1] 77
 > str(h1)
-class 'hashtab': 30 entries; type="identical", addr=<pointer: 0x563e57745d28> 
+class 'hashtab': 30 entries; type="identical", addr=<pointer: 0x55b285703fa0> 
 > 
 > ## An example of using  maphash():  get all hashkeys of a hash table:
 > hashkeys <- function(h) {
@@ -3732,35 +3732,35 @@ class 'hashtab': 30 entries; type="identical", addr=<pointer: 0x563e57745d28>
 > str(kList) # the *order* is "arbitrary" & cannot be "known"
 List of 30
  $ : NULL
- $ : chr "T"
- $ : chr "H"
- $ : chr "ABC"
- $ : chr "Y"
- $ : chr "S"
- $ : chr "Q"
- $ : chr "B"
- $ : chr "W"
- $ : chr "O"
- $ : chr "M"
- $ : chr "D"
- $ : chr "G"
- $ : chr "V"
- $ : int 3
  $ : chr "A"
- $ : chr "L"
- $ : chr "U"
- $ : chr "K"
- $ : chr "I"
- $ : chr "E"
- $ : chr "X"
- $ : chr "R"
- $ : chr "Z"
- $ : chr "F"
- $ : chr "N"
- $ : chr "J"
- $ : chr "P"
- $ :<environment: R_GlobalEnv> 
  $ : chr "C"
+ $ : chr "D"
+ $ : chr "L"
+ $ : chr "Y"
+ $ : chr "B"
+ $ : chr "ABC"
+ $ : chr "N"
+ $ : chr "F"
+ $ : chr "R"
+ $ : chr "W"
+ $ : chr "M"
+ $ : int 3
+ $ : chr "V"
+ $ : chr "H"
+ $ : chr "Q"
+ $ : chr "J"
+ $ : chr "U"
+ $ : chr "G"
+ $ : chr "E"
+ $ : chr "P"
+ $ : chr "O"
+ $ : chr "T"
+ $ : chr "Z"
+ $ : chr "K"
+ $ : chr "S"
+ $ :<environment: R_GlobalEnv> 
+ $ : chr "X"
+ $ : chr "I"
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -8787,7 +8787,7 @@ step factor 0.000488281 reduced below 'minFactor' of 0.000976562
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  12.506 0.537 13.34 0.049 0.033 
+Time elapsed:  12.836 0.595 14.067 0.055 0.025 
 > grDevices::dev.off()
 null device 
           1 

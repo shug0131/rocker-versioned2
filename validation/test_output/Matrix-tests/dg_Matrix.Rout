@@ -121,7 +121,7 @@ Formal class 'dsCMatrix' [package "Matrix"] with 7 slots
 > ### -> uniq* functions now in ../R/Auxiliaries.R
 > (t2 <- system.time(um2 <- asUniqueT(m1)))
    user  system elapsed 
-  0.000   0.000   0.001 
+  0.001   0.000   0.000 
 > stopifnot(identical(m2,um2))
 > 
 > ### -> error/warning condition for solve() of a singular matrix (Barry Rowlingson)
@@ -180,5 +180,5 @@ Error in .local(x, ...) :
 + 	  all.equal(log(-prod(diag(luM1@U))), c(d1$modulus)))
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  1.977 0.116 1.986 0.008 0 
+Time elapsed:  2.02 0.169 2.205 0.008 0.003 
 > 

@@ -1996,7 +1996,7 @@ t3* 0.000000 -0.7305799    2.152173
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  24.559 1.706 25.89 0 0 
+Time elapsed:  25.392 1.487 28.042 0 0 
 > grDevices::dev.off()
 null device 
           1 

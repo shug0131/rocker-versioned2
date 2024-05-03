@@ -1047,7 +1047,7 @@ Available components:
  [6] "clusinfo"   "silinfo"    "diss"       "call"       "data"      
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.624 0.279 1.647 0 0 
+Time elapsed:  0.667 0.165 0.845 0 0 
 > 
 > ## re-starting with medoids from pv6  shouldn't change:
 > pv6. <- pam(votes.repub, 6, medoids = pv6$id.med, trace = 3)
@@ -1169,7 +1169,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.358   0.015   3.283 
+Time   1.347   0.053   1.633 
 >  ## bswapPamOnce  algorithm
 > st1 <- showSys.time(pamxonce  <- pam(x, 4, pamonce=TRUE, trace.lev=2))# 6.122   0.024   6.181
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1182,7 +1182,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.014   0.006   1.850 
+Time   1.024   0.027   1.160 
 > ## bswapPamOnceDistIndice
 > st2 <- showSys.time(pamxonce2 <- pam(x, 4, pamonce = 2,  trace.lev=2))# 4.101   0.024   4.151
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1195,7 +1195,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.836   0.003   1.413 
+Time   0.852   0.033   1.028 
 > ## bswapPamSchubert FastPAM1
 > st3 <- showSys.time(pamxonce3 <- pam(x, 4, pamonce = 3,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1208,7 +1208,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.631   0.001   1.124 
+Time   0.668   0.022   0.917 
 > ## bswapPamSchubert FastPAM2
 > st4 <- showSys.time(pamxonce4 <- pam(x, 4, pamonce = 4,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1221,7 +1221,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.633   0.000   1.115 
+Time   0.671   0.009   0.803 
 > ## bswapPamSchubert FastPAM2 with linearized memory access
 > st5 <- showSys.time(pamxonce5 <- pam(x, 4, pamonce = 5,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1234,7 +1234,7 @@ pam()'s bswap(*, s=15.7788, pamonce=5): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.580   0.000   0.808 
+Time   0.619   0.044   0.868 
 > ## bswapPamSchubert FasterPAM
 > st6 <- showSys.time(pamxonce6 <- pam(x, 4, pamonce = 6,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1254,11 +1254,11 @@ pam()'s bswap(*, s=15.7788, pamonce=6): build 4 medoids:
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.567   0.000   1.008 
+Time   0.570   0.012   0.612 
 > show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
-                 6:orig 5:orig  4:orig  3:orig  2:orig  1:orig
-Time  user.self 0.41753 0.4271 0.46613 0.46465 0.61561 0.74669
-Time  sys.child     NaN    NaN     NaN     NaN     NaN     NaN
+                 6:orig  5:orig  4:orig  3:orig  2:orig  1:orig
+Time  user.self 0.42316 0.45954 0.49814 0.49592 0.63252 0.76021
+Time  sys.child     NaN     NaN     NaN     NaN     NaN     NaN
 > 
 > ## only call element is not equal
 > (icall <- which(names(pamx) == "call"))
@@ -1284,7 +1284,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): medoids given;   after build: medoids ar
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   2.380   0.016   4.185 
+Time   2.400   0.008   2.606 
 > st1 <- showSys.time(pamxoncest  <- pam(x, 4, medoids = med0, pamonce=TRUE, trace.lev=2))#   8.503   0.024   8.578
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=1): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1294,7 +1294,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): medoids given;   after build: medoids ar
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.562   0.013   3.249 
+Time   1.572   0.000   1.601 
 > st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace.lev=2))#   5.587   0.025   5.647
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=2): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1304,7 +1304,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): medoids given;   after build: medoids ar
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.146   0.004   2.353 
+Time   1.135   0.004   1.147 
 > st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=3): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1314,7 +1314,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): medoids given;   after build: medoids ar
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.609   0.000   0.975 
+Time   0.597   0.004   0.606 
 > st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=4): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1325,7 +1325,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): medoids given;   after build: medoids ar
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.441   0.009   0.821 
+Time   0.442   0.001   0.444 
 > st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=5): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1336,7 +1336,7 @@ pam()'s bswap(*, s=15.7788, pamonce=5): medoids given;   after build: medoids ar
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.373   0.004   0.830 
+Time   0.369   0.000   0.371 
 > st6 <- showSys.time(pamxonce6st <- pam(x, 4, medoids = med0, pamonce=6,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=6): medoids given;   after build: medoids are    1  501 1251 2001
@@ -1369,11 +1369,11 @@ pam()'s bswap(*, s=15.7788, pamonce=6): medoids given;   after build: medoids ar
    swp new 2153 <-> 2089 old; decreasing diss. 1738.46 by -5.2211
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.306   0.004   0.575 
+Time   0.306   0.000   0.347 
 > show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
-                 6:orig  5:orig  4:orig  3:orig  2:orig 1:orig
-Time  user.self 0.12857 0.15672 0.18529 0.25588 0.48151 0.6563
-Time  sys.child     NaN     NaN     NaN     NaN     NaN    NaN
+                6:orig  5:orig  4:orig  3:orig  2:orig 1:orig
+Time  user.self 0.1275 0.15375 0.18417 0.24875 0.47292  0.655
+Time  sys.child    NaN     NaN     NaN     NaN     NaN    NaN
 > 
 > ## only call element is not equal
 > stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
@@ -1395,7 +1395,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): medoids given;   after build: medoids ar
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   2.909   0.006   7.420 
+Time   2.837   0.012   3.003 
 > st1 <- showSys.time(pamxoncest  <- pam(x, 4, medoids = med0, pamonce=TRUE, trace.lev=2))#  8.384   0.024   8.459
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=1): medoids given;   after build: medoids are    1    2    3    4
@@ -1406,7 +1406,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): medoids given;   after build: medoids ar
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.831   0.003   3.312 
+Time   1.817   0.000   1.884 
 > st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace.lev=2))#  5.455   0.030   5.520
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=2): medoids given;   after build: medoids are    1    2    3    4
@@ -1416,3 +1416,403 @@ pam()'s bswap(*, s=15.7788, pamonce=2): medoids given;   after build: medoids ar
    swp new  414 <->    1 old; decreasing diss. 1819.59 by -86.3404
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   1.308   0.005   1.366 
+> st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=3): medoids given;   after build: medoids are    1    2    3    4
+   swp new 1421 <->    4 old; decreasing diss. 21009.4 by -15939.9
+   swp new 2153 <->    3 old; decreasing diss. 5069.52 by -1657.88
+   swp new  915 <->    2 old; decreasing diss. 3411.65 by -1592.06
+   swp new  414 <->    1 old; decreasing diss. 1819.59 by -86.3404
+   swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.663   0.012   0.684 
+> st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=4): medoids given;   after build: medoids are    1    2    3    4
+   swp new 1421 <->    4 old; decreasing diss. 21009.4 by -15939.9
+   swp new 2153 <->    3 old; decreasing diss. 5069.52 by -1657.88
+   swp new  915 <->    2 old; decreasing diss. 3411.65 by -1592.06
+   swp new  414 <->    1 old; decreasing diss. 1819.59 by -86.3404
+   fswp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.592   0.004   0.612 
+> st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=5): medoids given;   after build: medoids are    1    2    3    4
+   swp new 1421 <->    4 old; decreasing diss. 21009.4 by -15939.9
+   swp new 2153 <->    3 old; decreasing diss. 5069.52 by -1657.88
+   swp new  915 <->    2 old; decreasing diss. 3411.65 by -1592.06
+   swp new  414 <->    1 old; decreasing diss. 1819.59 by -86.3404
+   fswp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.478   0.000   0.484 
+> st6 <- showSys.time(pamxonce6st <- pam(x, 4, medoids = med0, pamonce=6,    trace.lev=2))#
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=6): medoids given;   after build: medoids are    1    2    3    4
+   swp new    7 <->    3 old; decreasing diss. 21009.4 by -4.9986
+   swp new    8 <->    2 old; decreasing diss. 21004.4 by -16.4723
+   swp new   11 <->    7 old; decreasing diss. 20987.9 by -12.0798
+   swp new   12 <->    8 old; decreasing diss. 20975.9 by -3.31491
+   swp new   13 <->    1 old; decreasing diss. 20972.5 by -4.88251
+   swp new   14 <->   13 old; decreasing diss. 20967.7 by -1.90148
+   swp new   15 <->   14 old; decreasing diss. 20965.8 by -9.59363
+   swp new   22 <->   11 old; decreasing diss. 20956.2 by -10.0478
+   swp new   24 <->   15 old; decreasing diss. 20946.1 by -7.99457
+   swp new   26 <->   12 old; decreasing diss. 20938.1 by -3.0991
+   swp new   44 <->   22 old; decreasing diss.   20935 by -880.436
+   swp new   45 <->    4 old; decreasing diss. 20054.6 by -9.44638
+   swp new   55 <->   26 old; decreasing diss. 20045.1 by -1.77816
+   swp new   57 <->   24 old; decreasing diss. 20043.4 by -1.76138
+   swp new   58 <->   44 old; decreasing diss. 20041.6 by -178.122
+   swp new   63 <->   45 old; decreasing diss. 19863.5 by -0.34634
+   swp new   71 <->   57 old; decreasing diss. 19863.1 by -1.49747
+   swp new   75 <->   63 old; decreasing diss. 19861.6 by -1.31804
+   swp new   76 <->   71 old; decreasing diss. 19860.3 by -1.42789
+   swp new   80 <->   55 old; decreasing diss. 19858.9 by -5.29615
+   swp new   81 <->   75 old; decreasing diss. 19853.6 by -0.164308
+   swp new   83 <->   76 old; decreasing diss. 19853.4 by -0.0877432
+   swp new  115 <->   81 old; decreasing diss. 19853.3 by -0.303527
+   swp new  171 <->   58 old; decreasing diss.   19853 by -971.874
+   swp new  185 <->  115 old; decreasing diss. 18881.2 by -0.471238
+   swp new  192 <->   80 old; decreasing diss. 18880.7 by -0.294662
+   swp new  257 <->  185 old; decreasing diss. 18880.4 by -0.466733
+   swp new  290 <->  257 old; decreasing diss. 18879.9 by -0.105762
+   swp new  309 <->   83 old; decreasing diss. 18879.8 by -0.0395709
+   swp new  419 <->  192 old; decreasing diss. 18879.8 by -0.0439214
+   swp new  425 <->  309 old; decreasing diss. 18879.7 by -0.136105
+   swp new  471 <->  425 old; decreasing diss. 18879.6 by -0.244642
+   swp new  501 <->  171 old; decreasing diss. 18879.4 by -11830.7
+   swp new  502 <->  471 old; decreasing diss. 7048.64 by -273.113
+   swp new  503 <->  290 old; decreasing diss. 6775.52 by -813.133
+   swp new  504 <->  502 old; decreasing diss. 5962.39 by -20.8894
+   swp new  507 <->  504 old; decreasing diss.  5941.5 by -42.7153
+   swp new  515 <->  501 old; decreasing diss. 5898.79 by -0.453931
+   swp new  523 <->  515 old; decreasing diss. 5898.33 by -67.1248
+   swp new  526 <->  507 old; decreasing diss. 5831.21 by -0.673248
+   swp new  527 <->  526 old; decreasing diss. 5830.53 by -2.26904
+   swp new  537 <->  503 old; decreasing diss. 5828.26 by -3.1636
+   swp new  542 <->  527 old; decreasing diss.  5825.1 by -2.0623
+   swp new  545 <->  542 old; decreasing diss. 5823.04 by -17.9136
+   swp new  547 <->  523 old; decreasing diss. 5805.13 by -194.143
+   swp new  573 <->  547 old; decreasing diss. 5610.98 by -607.192
+   swp new  576 <->  545 old; decreasing diss. 5003.79 by -0.801911
+   swp new  579 <->  573 old; decreasing diss. 5002.99 by -347.734
+   swp new  592 <->  576 old; decreasing diss. 4655.26 by -0.997177
+   swp new  604 <->  592 old; decreasing diss. 4654.26 by -0.808458
+   swp new  617 <->  604 old; decreasing diss. 4653.45 by -1.02162
+   swp new  813 <->  537 old; decreasing diss. 4652.43 by -0.254896
+   swp new  883 <->  617 old; decreasing diss. 4652.17 by -1.83048
+   swp new  955 <->  813 old; decreasing diss. 4650.34 by -0.591944
+   swp new 1015 <->  883 old; decreasing diss. 4649.75 by -0.0303283
+   swp new 1016 <->  955 old; decreasing diss. 4649.72 by -0.343593
+   swp new 1086 <-> 1016 old; decreasing diss. 4649.38 by -0.0942057
+   swp new 1088 <-> 1015 old; decreasing diss. 4649.28 by -0.0747132
+   swp new 1111 <-> 1086 old; decreasing diss. 4649.21 by -0.996659
+   swp new 1131 <-> 1088 old; decreasing diss. 4648.21 by -0.773913
+   swp new 1134 <-> 1111 old; decreasing diss. 4647.44 by -0.174449
+   swp new 1151 <-> 1131 old; decreasing diss. 4647.26 by -0.319467
+   swp new 1251 <->  579 old; decreasing diss. 4646.94 by -1367.16
+   swp new 1252 <-> 1251 old; decreasing diss. 3279.79 by -27.203
+   swp new 1253 <-> 1151 old; decreasing diss. 3252.58 by -137.657
+   swp new 1255 <-> 1252 old; decreasing diss. 3114.93 by -52.4651
+   swp new 1257 <-> 1253 old; decreasing diss. 3062.46 by -42.3678
+   swp new 1259 <-> 1255 old; decreasing diss. 3020.09 by -1.87135
+   swp new 1266 <-> 1257 old; decreasing diss. 3018.22 by -90.6385
+   swp new 1280 <-> 1259 old; decreasing diss. 2927.58 by -20.3614
+   swp new 1283 <-> 1266 old; decreasing diss. 2907.22 by -272.98
+   swp new 1288 <-> 1280 old; decreasing diss. 2634.24 by -1.69952
+   swp new 1300 <-> 1288 old; decreasing diss. 2632.54 by -9.58469
+   swp new 1325 <-> 1300 old; decreasing diss. 2622.96 by -7.37653
+   swp new 1612 <-> 1283 old; decreasing diss. 2615.58 by -2.38886
+   swp new 2001 <-> 1612 old; decreasing diss. 2613.19 by -788.545
+   swp new 2089 <-> 2001 old; decreasing diss. 1824.65 by -3.28836
+   swp new 2153 <-> 2089 old; decreasing diss. 1821.36 by -5.16445
+   swp new   12 <->  419 old; decreasing diss. 1816.19 by -28.3676
+   swp new   15 <->   12 old; decreasing diss. 1787.83 by -2.88573
+   swp new   16 <->   15 old; decreasing diss. 1784.94 by -3.50571
+   swp new   33 <->   16 old; decreasing diss. 1781.43 by -0.382726
+   swp new   56 <->   33 old; decreasing diss. 1781.05 by -0.660581
+   swp new   70 <->   56 old; decreasing diss. 1780.39 by -9.63432
+   swp new   86 <->   70 old; decreasing diss. 1770.76 by -2.56554
+   swp new  123 <->   86 old; decreasing diss. 1768.19 by -1.30247
+   swp new  414 <->  123 old; decreasing diss. 1766.89 by -0.130313
+   swp new  507 <-> 1134 old; decreasing diss. 1766.76 by -1.67967
+   swp new  509 <->  507 old; decreasing diss. 1765.08 by -11.8255
+   swp new  530 <->  509 old; decreasing diss. 1753.25 by -9.54887
+   swp new  542 <->  530 old; decreasing diss.  1743.7 by -2.59694
+   swp new  574 <->  542 old; decreasing diss. 1741.11 by -3.50085
+   swp new  913 <->  574 old; decreasing diss. 1737.61 by -0.356354
+   swp new  915 <->  913 old; decreasing diss. 1737.25 by -0.471447
+   swp new 1300 <-> 1325 old; decreasing diss. 1736.78 by -0.589135
+   swp new 1421 <-> 1300 old; decreasing diss. 1736.19 by -2.94296
+   swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.366   0.000   0.371 
+> show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
+                 6:orig  5:orig  4:orig 3:orig  2:orig  1:orig
+Time  user.self 0.12901 0.16849 0.20867 0.2337 0.46105 0.64047
+Time  sys.child     NaN     NaN     NaN    NaN     NaN     NaN
+> 
+> ## only call element is not equal
+> stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
++           all.equal(pamxoncest[-icall], pamxonce2st[-icall]),
++           all.equal(pamxoncest[-icall], pamxonce3st[-icall]),
++           all.equal(pamxoncest[-icall], pamxonce4st[-icall]),
++           all.equal(pamxoncest[-icall], pamxonce5st[-icall]),
++           all.equal(pamxoncest[-icall], pamxonce6st[-icall]))
+> 
+> 
+> ## Medoid bug  --- MM: Fixed, well "0L+ hack", in my pam.q, on 2012-01-31
+> ## ----------
+> med0 <- (1:6)
+> st0 <- showSys.time(pamxst   <- pam(x, 6, medoids = med0 ,            trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=0): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   swp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   swp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   swp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   8.051   0.083   8.684 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st1 <- showSys.time(pamxst.1 <- pam(x, 6, medoids = med0 , pamonce=1, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=1): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   swp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   swp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   swp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   5.054   0.005   5.128 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st2 <- showSys.time(pamxst.2 <- pam(x, 6, medoids = med0 , pamonce=2, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=2): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   swp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   swp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   swp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   3.593   0.050   3.982 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st3 <- showSys.time(pamxst.3 <- pam(x, 6, medoids = med0 , pamonce=3, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=3): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   swp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   swp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   swp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   1.176   0.000   1.220 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st4 <- showSys.time(pamxst.4 <- pam(x, 6, medoids = med0 , pamonce=4, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=4): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   fswp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   fswp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   fswp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   fswp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.867   0.004   1.052 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st5 <- showSys.time(pamxst.5 <- pam(x, 6, medoids = med0 , pamonce=5, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=5): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new 1421 <->    6 old; decreasing diss. 20991.1 by -15949.5
+   swp new 2153 <->    4 old; decreasing diss. 5041.66 by -1676.25
+   swp new  915 <->    3 old; decreasing diss. 3365.41 by -1671.37
+   swp new  325 <->    2 old; decreasing diss. 1694.04 by -53.8582
+   fswp new 2720 <->    5 old; decreasing diss. 1640.18 by -26.6572
+   swp new 2696 <-> 2153 old; decreasing diss. 1613.53 by -19.0531
+   fswp new   52 <->    1 old; decreasing diss. 1594.47 by -13.965
+   swp new 2709 <-> 2720 old; decreasing diss. 1580.51 by -5.81848
+   fswp new  199 <->  325 old; decreasing diss. 1574.69 by -2.65496
+   swp new  438 <->   52 old; decreasing diss. 1572.03 by -1.77054
+   fswp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.658   0.000   0.662 
+> stopifnot(identical(med0, 1:6))
+> med0 <- (1:6)
+> st6 <- showSys.time(pamxst.6 <- pam(x, 6, medoids = med0 , pamonce=6, trace.lev=2))
+C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
+pam()'s bswap(*, s=15.7788, pamonce=6): medoids given;   after build: medoids are    1    2    3    4    5    6
+   swp new    7 <->    6 old; decreasing diss. 20991.1 by -3.78677
+   swp new    8 <->    5 old; decreasing diss. 20987.4 by -25.0122
+   swp new    9 <->    2 old; decreasing diss. 20962.3 by -6.53934
+   swp new   10 <->    7 old; decreasing diss. 20955.8 by -0.133503
+   swp new   11 <->    9 old; decreasing diss. 20955.7 by -14.9294
+   swp new   12 <->   10 old; decreasing diss. 20940.7 by -2.35016
+   swp new   13 <->   12 old; decreasing diss. 20938.4 by -12.1267
+   swp new   14 <->   11 old; decreasing diss. 20926.3 by -2.99664
+   swp new   15 <->   13 old; decreasing diss. 20923.3 by -11.5871
+   swp new   20 <->    1 old; decreasing diss. 20911.7 by -0.0423835
+   swp new   22 <->    3 old; decreasing diss. 20911.6 by -8.76936
+   swp new   23 <->   20 old; decreasing diss. 20902.9 by -0.779336
+   swp new   39 <->   15 old; decreasing diss. 20902.1 by -0.285867
+   swp new   44 <->    4 old; decreasing diss. 20901.8 by -889.012
+   swp new   45 <->   14 old; decreasing diss. 20012.8 by -0.586001
+   swp new   46 <->   45 old; decreasing diss. 20012.2 by -1.1479
+   swp new   57 <->   39 old; decreasing diss. 20011.1 by -3.67274
+   swp new   58 <->   44 old; decreasing diss. 20007.4 by -189.36
+   swp new   62 <->   23 old; decreasing diss.   19818 by -0.626154
+   swp new   66 <->   46 old; decreasing diss. 19817.4 by -1.29082
+   swp new   68 <->   22 old; decreasing diss. 19816.1 by -0.580804
+   swp new   75 <->   62 old; decreasing diss. 19815.5 by -0.860328
+   swp new   76 <->   57 old; decreasing diss. 19814.7 by -1.97434
+   swp new  171 <->   58 old; decreasing diss. 19812.7 by -968.625
+   swp new  185 <->   75 old; decreasing diss. 18844.1 by -0.12972
+   swp new  198 <->   68 old; decreasing diss. 18843.9 by -0.533904
+   swp new  204 <->  198 old; decreasing diss. 18843.4 by -0.00928895
+   swp new  218 <->  185 old; decreasing diss. 18843.4 by -0.0287215
+   swp new  280 <->  204 old; decreasing diss. 18843.4 by -0.913559
+   swp new  329 <->  280 old; decreasing diss. 18842.5 by -0.101916
+   swp new  361 <->    8 old; decreasing diss. 18842.3 by -0.0966188
+   swp new  402 <->  361 old; decreasing diss. 18842.3 by -0.0394578
+   swp new  501 <->  171 old; decreasing diss. 18842.2 by -11833
+   swp new  502 <->   66 old; decreasing diss. 7009.24 by -309.206
+   swp new  503 <->  329 old; decreasing diss. 6700.03 by -887.644
+   swp new  504 <->   76 old; decreasing diss. 5812.39 by -28.554
+   swp new  506 <->  504 old; decreasing diss. 5783.83 by -14.2809
+   swp new  507 <->  506 old; decreasing diss. 5769.55 by -19.8604
+   swp new  508 <->  507 old; decreasing diss. 5749.69 by -7.88586
+   swp new  515 <->  501 old; decreasing diss.  5741.8 by -3.36477
+   swp new  519 <->  502 old; decreasing diss. 5738.44 by -1.16993
+   swp new  523 <->  515 old; decreasing diss. 5737.27 by -71.9147
+   swp new  526 <->  508 old; decreasing diss. 5665.35 by -1.56708
+   swp new  533 <->  526 old; decreasing diss. 5663.79 by -1.652
+   swp new  537 <->  519 old; decreasing diss. 5662.14 by -0.283073
+   swp new  540 <->  537 old; decreasing diss. 5661.85 by -2.35314
+   swp new  545 <->  533 old; decreasing diss.  5659.5 by -2.94604
+   swp new  547 <->  503 old; decreasing diss. 5656.55 by -221.229
+   swp new  573 <->  547 old; decreasing diss. 5435.32 by -574.75
+   swp new  575 <->  523 old; decreasing diss. 4860.57 by -17.1525
+   swp new  579 <->  573 old; decreasing diss. 4843.42 by -346.495
+   swp new  593 <->  575 old; decreasing diss. 4496.93 by -2.83188
+   swp new  594 <->  540 old; decreasing diss.  4494.1 by -0.50804
+   swp new  618 <->  545 old; decreasing diss. 4493.59 by -0.137577
+   swp new  660 <->  618 old; decreasing diss. 4493.45 by -4.45459
+   swp new  663 <->  593 old; decreasing diss.    4489 by -0.912682
+   swp new  709 <->  663 old; decreasing diss. 4488.08 by -1.44419
+   swp new  848 <->  594 old; decreasing diss. 4486.64 by -0.00137738
+   swp new  991 <->  709 old; decreasing diss. 4486.64 by -0.173764
+   swp new 1242 <->  660 old; decreasing diss. 4486.46 by -0.244432
+   swp new 1251 <->  579 old; decreasing diss. 4486.22 by -1369.29
+   swp new 1252 <->  402 old; decreasing diss. 3116.93 by -58.5165
+   swp new 1253 <-> 1252 old; decreasing diss. 3058.42 by -169.451
+   swp new 1255 <-> 1251 old; decreasing diss. 2888.97 by -30.8092
+   swp new 1257 <->  848 old; decreasing diss. 2858.16 by -70.3794
+   swp new 1262 <-> 1255 old; decreasing diss. 2787.78 by -29.3154
+   swp new 1266 <-> 1253 old; decreasing diss. 2758.46 by -64.8733
+   swp new 1282 <-> 1262 old; decreasing diss. 2693.59 by -0.803303
+   swp new 1283 <-> 1257 old; decreasing diss. 2692.79 by -238.314
+   swp new 1284 <-> 1266 old; decreasing diss. 2454.47 by -6.79018
+   swp new 1289 <-> 1284 old; decreasing diss. 2447.68 by -6.25715
+   swp new 1291 <-> 1289 old; decreasing diss. 2441.42 by -1.33251
+   swp new 1293 <-> 1291 old; decreasing diss. 2440.09 by -4.73682
+   swp new 1299 <-> 1293 old; decreasing diss. 2435.35 by -5.10123
+   swp new 1301 <-> 1282 old; decreasing diss. 2430.25 by -3.83834
+   swp new 1322 <-> 1301 old; decreasing diss. 2426.41 by -1.61521
+   swp new 1332 <-> 1322 old; decreasing diss.  2424.8 by -1.66893
+   swp new 1335 <-> 1299 old; decreasing diss. 2423.13 by -9.28429
+   swp new 1374 <-> 1332 old; decreasing diss. 2413.85 by -1.14706
+   swp new 1469 <-> 1374 old; decreasing diss.  2412.7 by -0.0376604
+   swp new 1583 <-> 1335 old; decreasing diss. 2412.66 by -0.0266074
+   swp new 1612 <-> 1283 old; decreasing diss. 2412.64 by -1.78413
+   swp new 2001 <-> 1612 old; decreasing diss. 2410.85 by -794.078
+   swp new 2089 <-> 2001 old; decreasing diss. 1616.77 by -3.16676
+   swp new 2153 <-> 2089 old; decreasing diss. 1613.61 by -5.2914
+   swp new   12 <->  218 old; decreasing diss. 1608.32 by -9.02144
+   swp new   15 <->   12 old; decreasing diss. 1599.29 by -2.88573
+   swp new   16 <->   15 old; decreasing diss. 1596.41 by -3.50571
+   swp new   33 <->   16 old; decreasing diss.  1592.9 by -0.382726
+   swp new   56 <->   33 old; decreasing diss. 1592.52 by -0.660581
+   swp new   70 <->   56 old; decreasing diss. 1591.86 by -9.63432
+   swp new   86 <->   70 old; decreasing diss. 1582.22 by -2.56554
+   swp new  123 <->   86 old; decreasing diss. 1579.66 by -1.30247
+   swp new  414 <->  123 old; decreasing diss. 1578.36 by -0.130313
+   swp new  507 <-> 1242 old; decreasing diss. 1578.23 by -16.7114
+   swp new  513 <->  991 old; decreasing diss. 1561.51 by -2.15127
+   swp new  518 <->  507 old; decreasing diss. 1559.36 by -7.23052
+   swp new  556 <->  518 old; decreasing diss. 1552.13 by -1.79073
+   swp new  622 <->  513 old; decreasing diss. 1550.34 by -0.947204
+   swp new  822 <->  556 old; decreasing diss.  1549.4 by -0.320612
+   swp new  926 <->  622 old; decreasing diss. 1549.07 by -1.31521
+   swp new 1106 <->  926 old; decreasing diss. 1547.76 by -0.187491
+   swp new 1124 <->  822 old; decreasing diss. 1547.57 by -0.261824
+   swp new 1194 <-> 1124 old; decreasing diss. 1547.31 by -0.0387596
+   swp new 1256 <-> 1583 old; decreasing diss. 1547.27 by -1.04235
+   swp new 1262 <-> 1469 old; decreasing diss. 1546.23 by -2.25214
+   swp new 1429 <-> 1256 old; decreasing diss. 1543.98 by -0.359624
+   swp new 1592 <-> 1429 old; decreasing diss. 1543.62 by -0.641983
+   swp new 2286 <-> 2153 old; decreasing diss. 1542.98 by -0.109986
+   swp new 2482 <-> 2286 old; decreasing diss. 1542.87 by -0.0744393
+end{bswap()}, end{cstat()}
+Time    user  system elapsed 
+Time   0.383   0.000   0.396 
+> stopifnot(identical(med0, 1:6))
+> stopifnot(all.equal(pamxst[-icall], pamxst.1 [-icall]),
++           all.equal(pamxst[-icall], pamxst.2 [-icall]),
++           all.equal(pamxst[-icall], pamxst.3 [-icall]),
++           all.equal(pamxst[-icall], pamxst.4 [-icall]),
++           all.equal(pamxst[-icall], pamxst.5 [-icall]))
+> # FasterPAM finds a better solution here, by chance
+> stopifnot(pamxst$objective >= pamxst.6$objective)
+> 
+> 
+> ## Last Line:
+> cat('Time elapsed: ', proc.time() - .proctime00,'\n')
+Time elapsed:  42.289 0.57 45.833 0 0 
+> 
+> 

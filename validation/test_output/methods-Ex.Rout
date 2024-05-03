@@ -67,7 +67,7 @@ function (fName)
         stop(fName, " is ambiguous: ", length(allF), " versions")
     else get(fName, allF[[1]])
 }
-<bytecode: 0x55c746a4d900>
+<bytecode: 0x562058951900>
 > rm(lm)
 > 
 > ## Don't show: 
@@ -213,7 +213,7 @@ Object of class "myFrame"
 1 1 -0.6264538 i
 2 2  0.1836433 o
 Slot "timestamps":
-[1] "2024-05-03 14:13:12 UTC" "2024-05-03 14:13:12 UTC"
+[1] "2024-05-03 16:19:54 UTC" "2024-05-03 16:19:54 UTC"
 
 > ## IGNORE_RDIFF_END
 > 
@@ -1470,8 +1470,8 @@ standardGeneric for "with" defined from package "base"
 
 function (data, expr, ...) 
 standardGeneric("with")
-<bytecode: 0x55c748a68f28>
-<environment: 0x55c748a63660>
+<bytecode: 0x56205a96cf58>
+<environment: 0x56205a967690>
 Methods may be defined for arguments: data
 Use  showMethods(with)  for currently available ones.
 > 
@@ -4012,7 +4012,7 @@ Error in validObject(tT, complete = TRUE) :
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.777 0.119 8.023 0 0 
+Time elapsed:  7.722 0.133 7.871 0 0 
 > grDevices::dev.off()
 null device 
           1 

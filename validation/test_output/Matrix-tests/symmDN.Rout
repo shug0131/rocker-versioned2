@@ -213,5 +213,5 @@ c 0.8703883 0.7977240 1.0000000
 > 
 > 
 > cat("Time elapsed:", proc.time(), "\n") # "stats"
-Time elapsed: 1.779 0.096 1.88 0.009 0 
+Time elapsed: 1.794 0.106 2.041 0.007 0.001 
 > 

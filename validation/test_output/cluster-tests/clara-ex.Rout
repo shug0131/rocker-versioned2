@@ -29,14 +29,14 @@ Loading required package: tools
 > nSim <- 100
 > nCl <- 3 # = no.classes
 > showProc.time()
-Time (user system elapsed): 0.004 0.001 0.004 
+Time (user system elapsed): 0.002 0.003 0.005 
 > 
 > ## unknown problem: this is still platform dependent to some extent:
 > set.seed(107)# << reproducibility; somewhat favorable with "small iDoubt"
 > cl <- replicate(nSim, clara(xclara, nCl, rngR = TRUE)$cluster)
 > tcl <- apply(cl,1, tabulate, nbins = nCl)
 > showProc.time()
-Time (user system elapsed): 0.287 0.024 0.407 
+Time (user system elapsed): 0.299 0.032 0.347 
 > ## those that are not always in same cluster (5 out of 3000 for this seed):
 > (iDoubt <- which(apply(tcl,2, function(n) all(n < nSim))))
  [1]    6   71  243  245  610  708  727  770 1038 1081 1120 1248 1289 1610 1644

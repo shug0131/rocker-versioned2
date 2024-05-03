@@ -1523,7 +1523,7 @@ Method Definition:
 
 function (x, y) 
 .Call(R_sparse_matmult, x, y, FALSE, FALSE, FALSE, FALSE)
-<bytecode: 0x55b010c33a20>
+<bytecode: 0x557b39711a50>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -1535,7 +1535,7 @@ Method Definition:
 
 function (x, y) 
 .Call(R_sparse_matmult, x, y, FALSE, FALSE, FALSE, FALSE)
-<bytecode: 0x55b010c345f0>
+<bytecode: 0x557b39712620>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -1554,7 +1554,7 @@ function (x, y)
     r@Dimnames <- matmultDN(dimnames(x), y@Dimnames, type = 1L)
     r
 }
-<bytecode: 0x55b010c419a8>
+<bytecode: 0x557b3971f9d8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -1566,7 +1566,7 @@ Method Definition:
 
 function (x, y) 
 .Call(R_diagonal_matmult, x, y, FALSE, FALSE, FALSE)
-<bytecode: 0x55b010c4f150>
+<bytecode: 0x557b3972d180>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -1578,7 +1578,7 @@ Method Definition:
 
 function (x, y) 
 .Call(R_diagonal_matmult, x, y, FALSE, FALSE, FALSE)
-<bytecode: 0x55b010c4f150>
+<bytecode: 0x557b3972d180>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -1809,5 +1809,5 @@ defined "diagonalMatrix" "TsparseMatrix"
 +         checkKronecker(lX[[i]], lY[[j]], make.dimnames = TRUE)
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  8.531 0.6 8.774 0.008 0.002 
+Time elapsed:  8.439 0.544 8.598 0.007 0.001 
 > 

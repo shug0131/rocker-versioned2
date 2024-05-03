@@ -354,7 +354,7 @@ Error in ..subscript.2ary(x, l[[1L]], l[[2L]], drop = drop[1L]) :
 +     if(!isVirtualClass(def <- getClassDef(cl))) validObject(new(def))
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # "stats"
-Time elapsed:  3.482 0.187 3.594 0.008 0 
+Time elapsed:  3.656 0.194 3.888 0.006 0.002 
 > 
 > if(!interactive()) warnings()
 Warning message:

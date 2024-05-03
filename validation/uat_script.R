@@ -20,6 +20,14 @@ sessionInfo()
 #https://rocker-project.org/
 #https://github.com/rocker-org
 
+# cd $R_HOME/tests
+# sudo chmod a+rwx -R .
+# ../bin/R CMD make check
+#../bin/R CMD make check-devel
+#../bin/R CMD make check-all
+#../bin/R CMD make test-BasePackages
+#../bin/R CMD make test-Recommended
+# Don't actually need the ../bin  
 
 #Ref to the manual where it says how to validate
 # https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Testing-a-Unix_002dalike-Installation
@@ -34,7 +42,8 @@ system("echo $HOSTNAME")
 
 # empty out the output directory first of all. 
 Sys.setenv(TEST_MC_CORES=parallel::detectCores())
-packages_both <- tools::testInstalledPackages(outDir="validation/test_output")
+packages_both <- tools::testInstalledPackages(scope="recommended",
+                                              outDir="validation/test_output")
 
 
 #  Work through the extra packages added on.

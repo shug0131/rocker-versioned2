@@ -879,7 +879,7 @@ function (x, ...)
     }
     .local(x, ...)
 }
-<bytecode: 0x55743eebc0b8>
+<bytecode: 0x55da87e260e8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -980,7 +980,7 @@ Known Subclasses: "ngCMatrix", "ntCMatrix", "nsCMatrix", "lgCMatrix", "ltCMatrix
 > getValidity(getClass("CsparseMatrix"))
 function (object) 
 .Call(CsparseMatrix_validate, object)
-<bytecode: 0x557439c06738>
+<bytecode: 0x55da82b70768>
 <environment: namespace:Matrix>
 > 
 > 
@@ -1134,7 +1134,7 @@ List of 2
 > system.time( # a fraction of a second
 +   sparse.sol <- with(KNex, solve(crossprod(mm), crossprod(mm, y))))
    user  system elapsed 
-  0.004   0.000   0.005 
+  0.005   0.000   0.004 
 > 
 > head(round(sparse.sol,3))
 6 x 1 Matrix of class "dgeMatrix"
@@ -2401,7 +2401,7 @@ Known Subclasses: "ngTMatrix", "ntTMatrix", "nsTMatrix", "lgTMatrix", "ltTMatrix
 > system.time(MJ0 <- sapply(rho, function(mult)
 +     determinant(USCounties + mult * I, logarithm = TRUE)$modulus))
    user  system elapsed 
-  0.530   0.000   0.532 
+  0.517   0.004   0.521 
 > 
 > ## Can be done faster by updating the Cholesky factor:
 > 
@@ -2409,14 +2409,14 @@ Known Subclasses: "ngTMatrix", "ntTMatrix", "nsTMatrix", "lgTMatrix", "ltTMatrix
 > system.time(MJ1 <- sapply(rho, function(mult)
 +     determinant(update(C1, USCounties, mult), sqrt = FALSE)$modulus))
    user  system elapsed 
-  0.171   0.000   0.177 
+  0.172   0.000   0.171 
 > stopifnot(all.equal(MJ0, MJ1))
 > 
 > C2 <- Cholesky(USCounties, super = TRUE, Imult = 2)
 > system.time(MJ2 <- sapply(rho, function(mult)
 +     determinant(update(C2, USCounties, mult), sqrt = FALSE)$modulus))
    user  system elapsed 
-  0.196   0.071   0.143 
+  0.191   0.072   0.134 
 > stopifnot(all.equal(MJ0, MJ2))
 > 
 > 
@@ -3484,7 +3484,7 @@ function (x, ...)
     }
     .local(x, ...)
 }
-<bytecode: 0x55743eec1440>
+<bytecode: 0x55da87e2b470>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -3504,7 +3504,7 @@ function (x, ...)
         t(ch)
     else ch
 }
-<bytecode: 0x55743eec2278>
+<bytecode: 0x55da87e2c2a8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -3602,7 +3602,7 @@ function (x, ...)
     }
     .local(x, ...)
 }
-<bytecode: 0x55743eebc0b8>
+<bytecode: 0x55da87e260e8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -3624,7 +3624,7 @@ function (x, ...)
     }
     x
 }
-<bytecode: 0x55743eeb99b8>
+<bytecode: 0x55da87e239e8>
 <environment: namespace:Matrix>
 
 Signatures:
@@ -3900,7 +3900,7 @@ V1 V2 V3 V4 V5 V6 V7 V8
 > mtm <- with(KNex, crossprod(mm))
 > system.time(ce <- condest(mtm))
    user  system elapsed 
-  0.056   0.000   0.056 
+  0.058   0.000   0.058 
 > sum(abs(ce$v)) ## || v ||_1  == 1
 [1] 1
 > ## Prove that  || A v || = || A || / est  (as ||v|| = 1):
@@ -3913,7 +3913,7 @@ V1 V2 V3 V4 V5 V6 V7 V8
 > system.time(rc <- rcond(mtm)) # takes ca  3 x  longer
 Warning in .local(x, norm, ...) : 'rcond' via sparse -> dense coercion
    user  system elapsed 
-  0.035   0.000   0.020 
+  0.028   0.004   0.020 
 > rc
 [1] 8.123888e-06
 > all.equal(rc, 1/ce$est) # TRUE -- the approximation was good
@@ -5797,12 +5797,12 @@ Formal class 'ngTMatrix' [package "Matrix"] with 5 slots
 > data(KNex, package = "Matrix")
 > ## Store as MatrixMarket (".mtx") file, here inside temporary dir./folder:
 > (MMfile <- file.path(tempdir(), "mmMM.mtx"))
-[1] "/tmp/RtmpZONXkB/mmMM.mtx"
+[1] "/tmp/RtmpRZi6J1/mmMM.mtx"
 > writeMM(KNex$mm, file=MMfile)
 NULL
 > file.info(MMfile)[,c("size", "ctime")] # (some confirmation of the file's)
                            size               ctime
-/tmp/RtmpZONXkB/mmMM.mtx 179265 2024-05-03 14:15:40
+/tmp/RtmpRZi6J1/mmMM.mtx 179265 2024-05-03 16:22:40
 > 
 > ## very simple export - in triplet format - to text file:
 > data(CAex, package = "Matrix")
@@ -6027,7 +6027,7 @@ NULL
 215 48 72  1.750359e-05
 216 72 72  4.550935e-05
 > message("writing to ", outf <- tempfile())
-writing to /tmp/RtmpZONXkB/file159cb3acc7949
+writing to /tmp/RtmpRZi6J1/file36473edf9bf3
 > write.table(s.CA, file = outf, row.names=FALSE)
 > ## and read it back -- showing off  sparseMatrix():
 > str(dd <- read.table(outf, header=TRUE))
@@ -6873,7 +6873,7 @@ Class "ordered", by class "numeric", distance 4
 > invPerm # a less general version of 'invertPerm'
 function (p, zero.p = FALSE, zero.res = FALSE) 
 invertPerm(p, if (zero.p) 0L else 1L, if (zero.res) 0L else 1L)
-<bytecode: 0x5574427e1140>
+<bytecode: 0x55da8b74b170>
 <environment: namespace:Matrix>
 > ## Don't show: 
 > stopifnot(exprs = {
@@ -8292,7 +8292,7 @@ function (x, uniqT = FALSE)
         list(i = T@i + 1L, j = T@j + 1L)
     else list(i = T@i + 1L, j = T@j + 1L, x = T@x)
 }
-<bytecode: 0x5574401f8848>
+<bytecode: 0x55da89162878>
 <environment: namespace:Matrix>
 > 
 > i <- c(1,3:8); j <- c(2,9,6:10); x <- 7 * (1:7)
@@ -8537,13 +8537,13 @@ List of 3
 >  ## tcrossprod() is very fast:
 >  system.time(tCmm <- tcrossprod(mm))# 0   (PIII, 933 MHz)
    user  system elapsed 
-  0.001   0.000   0.001 
+  0.001   0.000   0.002 
 >  system.time(cm <- crossprod(t(m))) # 0.16
    user  system elapsed 
-  0.010   0.003   0.008 
+  0.010   0.004   0.008 
 >  system.time(cm. <- tcrossprod(m))  # 0.02
    user  system elapsed 
-  0.013   0.000   0.007 
+  0.015   0.001   0.009 
 > 
 >  stopifnot(cm == as(tCmm, "matrix"))
 > 
@@ -9740,14 +9740,14 @@ L.c     .     .     .     .     .     .     .     1     1     1
 > ## Don't show: 
 > op <- options(max.print = 25000, width = 80)
 > sink(print(tempfile()))
-[1] "/tmp/RtmpZONXkB/file159cb24b65245"
+[1] "/tmp/RtmpRZi6J1/file36474461e972"
 > M <- Matrix(0, 10000, 100)
 > M[1,1] <- M[2,3] <- 3.14
 > st <- system.time(show(M))
 > sink()
 > st
    user  system elapsed 
-  0.080   0.051   0.132 
+  0.104   0.027   0.131 
 > 
 > if(interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA")))
 + ## valgrind (2023-07-26) gave 10.5 sec!
@@ -10107,10 +10107,10 @@ Warning in rankMatrix(L) :
   rankMatrix(<large sparse Matrix>, method = 'tolNorm2') coerces to dense matrix.
  Probably should rather use method = 'qr' !?
    user  system elapsed 
-  0.912   0.166   0.902 
+  0.848   0.145   1.065 
 > (st2 <- system.time(r2 <- rankMatrix(L, method = "qr"))) # considerably faster!
    user  system elapsed 
-  0.025   0.000   0.026 
+  0.022   0.000   0.023 
 > r1[[1]] == print(r2[[1]]) ## -->  ( 33  TRUE )
 [1] 33
 [1] TRUE
@@ -10222,7 +10222,7 @@ Warning in .local(x, norm, ...) : 'rcond' via sparse -> dense coercion
 > ## whereas this is *fast* even though it computes  solve(M3)
 > system.time(r. <- rcond(M3, useInv=TRUE))
    user  system elapsed 
-  0.007   0.000   0.008 
+  0.007   0.000   0.007 
 > if(interactive()) ## the values are not the same
 +   c(r, r.)  # 0.05555 0.013888
 > ## for all 4 norms available for sparseMatrix :
@@ -15265,12 +15265,12 @@ Formal class 'dsparseVector' [package "Matrix"] with 3 slots
   ..@ i     : int [1:250000] 14 16 79 90 156 204 206 244 308 320 ...
 > system.time(for(i in 1:4) hv <- head(v, 1e6))
    user  system elapsed 
-  0.031   0.000   0.031 
+  0.033   0.000   0.033 
 > ##   user  system elapsed
 > ##  0.033   0.000   0.032
 > system.time(for(i in 1:4) h2 <- v[1:1e6])
    user  system elapsed 
-  0.244   0.000   0.255 
+  0.237   0.000   0.239 
 > ##   user  system elapsed
 > ##  1.317   0.000   1.319
 > 
@@ -16129,7 +16129,7 @@ Class "replValueSp", by class "Matrix", distance 2
 > system.time(MJ0 <- sapply(rho, function(mult)
 +     determinant(wrld_1deg + mult * I, logarithm = TRUE)$modulus))
    user  system elapsed 
-  0.164   0.000   0.165 
+  0.167   0.000   0.168 
 > 
 > ## Can be done faster by updating the Cholesky factor:
 > 
@@ -16137,14 +16137,14 @@ Class "replValueSp", by class "Matrix", distance 2
 > system.time(MJ1 <- sapply(rho, function(mult)
 +     determinant(update(C1, wrld_1deg, mult), sqrt = FALSE)$modulus))
    user  system elapsed 
-  0.088   0.000   0.093 
+  0.087   0.000   0.087 
 > stopifnot(all.equal(MJ0, MJ1))
 > 
 > C2 <- Cholesky(wrld_1deg, super = TRUE, Imult = 2)
 > system.time(MJ2 <- sapply(rho, function(mult)
 +     determinant(update(C2, wrld_1deg, mult), sqrt = FALSE)$modulus))
    user  system elapsed 
-  0.067   0.040   0.065 
+  0.070   0.024   0.051 
 > stopifnot(all.equal(MJ0, MJ2))
 > 
 > 
@@ -16154,7 +16154,7 @@ Class "replValueSp", by class "Matrix", distance 2
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  16.274 1.612 16.56 0 0 
+Time elapsed:  16.397 1.54 16.85 0 0 
 > grDevices::dev.off()
 null device 
           1 

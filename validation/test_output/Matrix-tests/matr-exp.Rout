@@ -130,5 +130,5 @@ Loading required package: tools
 +           )
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  1.747 0.233 2.004 0.008 0.001 
+Time elapsed:  1.868 0.189 2.189 0.007 0.002 
 > 

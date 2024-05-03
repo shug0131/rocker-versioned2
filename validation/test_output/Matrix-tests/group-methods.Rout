@@ -244,7 +244,7 @@ Formal class 'lsyMatrix' [package "Matrix"] with 5 slots
 +     all.equal(log(abs( L7), 2), log2(abs( L7)))
 + })
 > showProc.time()
-Time (user system elapsed): 0.527 0.115 0.559 
+Time (user system elapsed): 0.555 0.102 0.588 
 > 
 > ## is.finite() -- notably for symmetric packed / uplo="L" with NA :
 > spU <- new("dspMatrix", Dim = c(3L, 3L), x = c(0, NA, 0, NA, NA, 0),           uplo = "U")
@@ -281,7 +281,7 @@ Time (user system elapsed): 0.527 0.115 0.559
 + })
 > 
 > showProc.time()
-Time (user system elapsed): 0.033 0.001 0.034 
+Time (user system elapsed): 0.038 0 0.045 
 > set.seed(111)
 > local({
 +     for(i in 1:(if(doExtras) 20 else 5)) {
@@ -325,8 +325,8 @@ Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
   ..@ x       : num [1:150000] -139671 -13383 -43683 181413 -654341 ...
   ..@ factors : list()
    user  system elapsed 
-  0.014   0.000   0.015 
-[1] 5387.52
+  0.015   0.000   0.016 
+[1] 5387.85
 Warning message:
 In all(mips) : coercing argument of type 'double' to logical
 > 
@@ -574,7 +574,7 @@ sparse vector (nnz/length = 14/21) of class "m.spV"
 + })
 > 
 > showProc.time()
-Time (user system elapsed): 0.899 0.027 0.957 
+Time (user system elapsed): 0.928 0.016 1.004 
 > 
 > ### Consider "all" Matrix classes
 > cl <- sapply(ls(), function(.) class(get(.)))
@@ -953,5 +953,5 @@ Asserted error: dim [product 1] do not match the length of object [2]
 [1] 16
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  3.163 0.259 3.356 0.007 0.001 
+Time elapsed:  3.187 0.232 3.383 0.007 0.002 
 > 

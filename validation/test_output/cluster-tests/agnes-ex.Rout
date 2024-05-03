@@ -485,7 +485,7 @@ List of 9
  - attr(*, "class")= chr [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time (user system elapsed): 0.065 0.03 0.446 
+Time (user system elapsed): 0.056 0.023 0.081 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -610,7 +610,7 @@ Available components:
 > stopifnot(all.equal(ar2[1:4], ar3[1:4], tol=1e-12))
 > 
 > showProc.time()
-Time (user system elapsed): 0.008 0.001 0.017 
+Time (user system elapsed): 0.008 0 0.008 
 > 
 > ## Small example, testing "flexible" vs "single"
 > i8 <- -c(1:2, 9:10)
@@ -756,7 +756,7 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time (user system elapsed): 0.076 0.008 0.165 
+Time (user system elapsed): 0.073 0.009 0.082 
 > 
 > ## an invalid "flexible" case - now must give error early:
 > x <- rbind(c( -6, -9), c(  0, 13),

@@ -24,11 +24,11 @@ basic_internet <- tools::testInstalledBasic("internet")
 
 ## Testing the recommended packages
 
-```{r packages, cache=TRUE, fig.show='hide'}
-Sys.setenv(TEST_MC_CORES=1)
+```{r packages, cache=TRUE}
 unlink("test_output", recursive=TRUE)
 dir.create("test_output")
 packages_base <- tools::testInstalledPackages(scope="base", outDir="test_output", errorsAreFatal = FALSE)
+#this fails somewehre, but just seems to be within Rmarkdown...
 packages_recommended <- tools::testInstalledPackages(scope="recommended", outDir="test_output", errorsAreFatal = FALSE)
 ```
 
