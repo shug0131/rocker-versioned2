@@ -1,0 +1,38 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(lattice)
+> 
+> pdf("fontsize.pdf", pointsize = 5)
+> 
+> splom(iris, sub = "pdf:fontsize = 5")
+> 
+> trellis.par.set(grid.pars = list(fontsize = 5))
+> splom(iris, sub = "grid.pars:fontsize = 5")
+> 
+> trellis.par.set(grid.pars = list(fontsize = 10))
+> splom(iris, sub = "grid.pars:fontsize = 10")
+> 
+> trellis.par.set(fontsize = list(text = 15))
+> splom(iris, sub = "grid.pars:fontsize = 15")
+> 
+> dev.off()
+null device 
+          1 
+> 
+> 
+> 

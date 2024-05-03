@@ -1,0 +1,250 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library("nlme")
+> 
+> ## PR#18157
+> mygnls <- function (mydata)
++     gnls(weight ~ SSlogis(Time, Asym, xmid, scal), data = mydata)
+> fm1 <- mygnls(Soybean) # failed in 3.1-153 with
+> ## Error in stats::nls(formula = weight ~ SSlogis(Time, Asym, xmid, scal),  : 
+> ##   object 'mydata' not found
+> 
+> ## similarly, each of the following calls of
+> ## nlme.formula(), nlsList.selfStart(), nlme.nlsList()
+> ## using a self-starting model with local data would fail in 3.1-153 with
+> ## Error in is.data.frame(data) : object 'mydata' not found
+> local({
++     mydata <- subset(Loblolly, Seed < "307")
++     fm2 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
++                 data = mydata, random = Asym ~ 1)
++     fml <- nlsList(SSasymp, data = mydata)
++     fm3 <- nlme(fml, random = Asym ~ 1)
++ })
+> 
+> 
+> ## look for data in the parent frame, not in nlme's namespace
+> groupedData <- Orthodont
+> m3 <- lme(distance ~ age, data = groupedData, random = ~1 | Subject)
+> augPred(m3, length.out = 2)
+    age .groups distance     .type
+1     8     M01 26.00000  original
+2    10     M01 25.00000  original
+3    12     M01 29.00000  original
+4    14     M01 31.00000  original
+5     8     M02 21.50000  original
+6    10     M02 22.50000  original
+7    12     M02 23.00000  original
+8    14     M02 26.50000  original
+9     8     M03 23.00000  original
+10   10     M03 22.50000  original
+11   12     M03 24.00000  original
+12   14     M03 27.50000  original
+13    8     M04 25.50000  original
+14   10     M04 27.50000  original
+15   12     M04 26.50000  original
+16   14     M04 27.00000  original
+17    8     M05 20.00000  original
+18   10     M05 23.50000  original
+19   12     M05 22.50000  original
+20   14     M05 26.00000  original
+21    8     M06 24.50000  original
+22   10     M06 25.50000  original
+23   12     M06 27.00000  original
+24   14     M06 28.50000  original
+25    8     M07 22.00000  original
+26   10     M07 22.00000  original
+27   12     M07 24.50000  original
+28   14     M07 26.50000  original
+29    8     M08 24.00000  original
+30   10     M08 21.50000  original
+31   12     M08 24.50000  original
+32   14     M08 25.50000  original
+33    8     M09 23.00000  original
+34   10     M09 20.50000  original
+35   12     M09 31.00000  original
+36   14     M09 26.00000  original
+37    8     M10 27.50000  original
+38   10     M10 28.00000  original
+39   12     M10 31.00000  original
+40   14     M10 31.50000  original
+41    8     M11 23.00000  original
+42   10     M11 23.00000  original
+43   12     M11 23.50000  original
+44   14     M11 25.00000  original
+45    8     M12 21.50000  original
+46   10     M12 23.50000  original
+47   12     M12 24.00000  original
+48   14     M12 28.00000  original
+49    8     M13 17.00000  original
+50   10     M13 24.50000  original
+51   12     M13 26.00000  original
+52   14     M13 29.50000  original
+53    8     M14 22.50000  original
+54   10     M14 25.50000  original
+55   12     M14 25.50000  original
+56   14     M14 26.00000  original
+57    8     M15 23.00000  original
+58   10     M15 24.50000  original
+59   12     M15 26.00000  original
+60   14     M15 30.00000  original
+61    8     M16 22.00000  original
+62   10     M16 21.50000  original
+63   12     M16 23.50000  original
+64   14     M16 25.00000  original
+65    8     F01 21.00000  original
+66   10     F01 20.00000  original
+67   12     F01 21.50000  original
+68   14     F01 23.00000  original
+69    8     F02 21.00000  original
+70   10     F02 21.50000  original
+71   12     F02 24.00000  original
+72   14     F02 25.50000  original
+73    8     F03 20.50000  original
+74   10     F03 24.00000  original
+75   12     F03 24.50000  original
+76   14     F03 26.00000  original
+77    8     F04 23.50000  original
+78   10     F04 24.50000  original
+79   12     F04 25.00000  original
+80   14     F04 26.50000  original
+81    8     F05 21.50000  original
+82   10     F05 23.00000  original
+83   12     F05 22.50000  original
+84   14     F05 23.50000  original
+85    8     F06 20.00000  original
+86   10     F06 21.00000  original
+87   12     F06 21.00000  original
+88   14     F06 22.50000  original
+89    8     F07 21.50000  original
+90   10     F07 22.50000  original
+91   12     F07 23.00000  original
+92   14     F07 25.00000  original
+93    8     F08 23.00000  original
+94   10     F08 23.00000  original
+95   12     F08 23.50000  original
+96   14     F08 24.00000  original
+97    8     F09 20.00000  original
+98   10     F09 21.00000  original
+99   12     F09 22.00000  original
+100  14     F09 21.50000  original
+101   8     F10 16.50000  original
+102  10     F10 19.00000  original
+103  12     F10 19.00000  original
+104  14     F10 19.50000  original
+105   8     F11 24.50000  original
+106  10     F11 25.00000  original
+107  12     F11 28.00000  original
+108  14     F11 28.00000  original
+109   8     M01 25.38635 predicted
+110  14     M01 29.34746 predicted
+111   8     M02 21.46107 predicted
+112  14     M02 25.42218 predicted
+113   8     M03 22.24613 predicted
+114  14     M03 26.20724 predicted
+115   8     M04 24.37699 predicted
+116  14     M04 28.33810 predicted
+117   8     M05 21.12462 predicted
+118  14     M05 25.08573 predicted
+119   8     M06 24.15269 predicted
+120  14     M06 28.11380 predicted
+121   8     M07 21.79752 predicted
+122  14     M07 25.75863 predicted
+123   8     M08 21.90967 predicted
+124  14     M08 25.87078 predicted
+125   8     M09 23.03118 predicted
+126  14     M09 26.99229 predicted
+127   8     M10 26.95646 predicted
+128  14     M10 30.91757 predicted
+129   8     M11 21.68537 predicted
+130  14     M11 25.64648 predicted
+131   8     M12 22.24613 predicted
+132  14     M12 26.20724 predicted
+133   8     M13 22.24613 predicted
+134  14     M13 26.20724 predicted
+135   8     M14 22.80688 predicted
+136  14     M14 26.76799 predicted
+137   8     M15 23.70409 predicted
+138  14     M15 27.66520 predicted
+139   8     M16 21.12462 predicted
+140  14     M16 25.08573 predicted
+141   8     F01 19.66666 predicted
+142  14     F01 23.62777 predicted
+143   8     F02 21.12462 predicted
+144  14     F02 25.08573 predicted
+145   8     F03 21.79752 predicted
+146  14     F03 25.75863 predicted
+147   8     F04 22.80688 predicted
+148  14     F04 26.76799 predicted
+149   8     F05 20.78816 predicted
+150  14     F05 24.74928 predicted
+151   8     F06 19.44235 predicted
+152  14     F06 23.40347 predicted
+153   8     F07 21.12462 predicted
+154  14     F07 25.08573 predicted
+155   8     F08 21.46107 predicted
+156  14     F08 25.42218 predicted
+157   8     F09 19.44235 predicted
+158  14     F09 23.40347 predicted
+159   8     F10 17.08719 predicted
+160  14     F10 21.04830 predicted
+161   8     F11 24.15269 predicted
+162  14     F11 28.11380 predicted
+> ## gave Error: data in 'm3' call must evaluate to a data frame
+> simulate(m3, m2 = list(random = ~ age | Subject), seed = 42, method = "ML")
+$null
+$null$ML
+  info    logLik
+1    0 -223.4352
+
+
+$alt
+$alt$ML
+  info    logLik
+1    0 -221.8652
+
+
+attr(,"class")
+[1] "simulate.lme"
+> ## gave Error: 'data' must be a data.frame, environment, or list
+> rm(groupedData)
+> 
+> 
+> ## PR#15892: formula.gls and formula.lme evaluated the call (in bad scope)
+> invisible(lapply(list(gls, lme), function (FUN) {
++     form <- follicles ~ 1
++     stopifnot(identical(formula(FUN(form, Ovary)), form))
++ }))
+> ## gave Error in eval(x$call$model) : object 'form' not found
+> 
+> 
+> ## Subject: [Bug 18559] New: nlme -> anova doesn't handle symbolic formulas nicely
+> ## Date: Sat, 08 Jul 2023 --- by Ben Bolker
+> formula <- height ~ a*exp(-b*age)
+> fm1 <- nlme(formula, data = Loblolly,
++             fixed  = a + b ~ 1,
++             random = a ~ 1,   start = c(a = 100, b = 1))
+> ## "same" for gnls:
+> fmGnl <- gnls(formula, data = Loblolly, start = c(a = 100, b = 1))
+> stopifnot(exprs = {
++     identical(formula(fm1), formula) ## was equal to stats::formula (!)
++     identical(getResponseFormula(fm1), ~height)
++     identical(formula(fmGnl), formula) # was stats::formula
++     identical(getResponseFormula(fmGnl), ~height)
++ })
+> 
+> 

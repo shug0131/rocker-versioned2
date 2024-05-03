@@ -1,0 +1,27 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## xy.coords() and xyz.coords() -- gets *classed* warning
+> tools::assertWarning(xy.coords(-2:10, log = "y"), verbose=TRUE)
+Asserted warning: 3 y values <= 0 omitted from logarithmic plot
+> op <- options(warn = 2)# ==> warnings are errors
+> suppressWarnings(xy.coords(-2:10, log = "y"), classes="log_le_0") -> xy
+> stopifnot(identical(xy$y, c(rep(NA_real_,3), 1:10)))
+> options(op) # (reverting)
+> tools::assertWarning(xy.coords(-2:10, log = "y"), verbose=TRUE)
+Asserted warning: 3 y values <= 0 omitted from logarithmic plot
+> 

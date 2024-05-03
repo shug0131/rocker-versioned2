@@ -1,0 +1,111 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(nlme)
+> 
+> ## PR#13788
+> qm <-  lmList(height ~ age | Subject, data = Oxboys)
+> nd <- with(Oxboys,
++            expand.grid(age = seq(min(age),max(age),length=50),
++                        Subject = levels(Subject))
++            )
+> 
+> ## failed in 3.1-92
+> res <- predict(qm, nd, se=TRUE)
+> stopifnot(is.data.frame(res), dim(res) == c(1300, 3),
++           identical(names(res), c("Subject", "fit", "se.fit")))
+> 
+> 
+> ## plots of ranef() and intervals.lmList() with new arguments 'xlab', 'ylab'
+> req <- ranef(qm)
+> (p.req <- plot(req, xlab = "R.Eff.", ylab = "Subj"))
+> # Fails (p.re2 <- plot(req, age ~ fitted(.)))
+> iqm <- intervals(qm)
+> stopifnot(is.array(iqm), dim(iqm) == c(26,3,2))
+> p.iq <- plot(iqm, ylab = "Subject [factor]")
+> ## Error: formal argument "ylab" matched by multiple .. in 3.1.137
+> stopifnot(inherits(p.iq, "trellis"),
++           inherits(p.req, "trellis"),
++           identical( unclass(p.req)[c("xlab","ylab")],
++                     list(xlab = "R.Eff.", ylab = "Subj")),
++           formula(p.iq) == (group ~ intervals | what))
+> p.iq
+> 
+> 
+> ## PR#16542: summary.lmList() with NA coefs in subgroup
+> lms <- lmList(pixel ~ day + I(day^2) | Dog, data = Pixel)
+> coefs <- coef(lms)
+> stopifnot(is.na(coefs["9", "I(day^2)"]),
++           identical(dim(coefs), c(10L, 3L)))
+> summary(lms)  # failed in nlme <= 3.1-155 with
+Call:
+  Model: pixel ~ day + I(day^2) | Dog 
+   Data: Pixel 
+
+Coefficients:
+   (Intercept) 
+   Estimate Std. Error   t value     Pr(>|t|)
+1  1045.943   7.478222 139.86525 1.940731e-89
+10 1048.850 106.993523   9.80293 6.802481e-15
+2  1046.267   7.478222 139.90851 1.898148e-89
+3  1046.851   9.124902 114.72465 2.859613e-83
+4  1048.258   9.124902 114.87885 2.597363e-83
+5  1089.361  32.040203  33.99980 4.340328e-46
+6  1091.370  32.040203  34.06252 3.830171e-46
+7  1148.164  35.115641  32.69666 6.112695e-45
+8  1058.441  35.115641  30.14159 1.443679e-42
+9  1083.650  22.915495  47.28896 5.811291e-56
+   day 
+     Estimate Std. Error     t value     Pr(>|t|)
+1   1.2192161   3.021944  0.40345427 6.878098e-01
+10 23.3500000  37.827923  0.61726889 5.390047e-01
+2   3.5702694   3.021944  1.18144808 2.413125e-01
+3   7.3186887   1.972954  3.70950836 4.055718e-04
+4  12.3351182   1.972954  6.25210689 2.559677e-08
+5   9.5239691   7.795367  1.22174741 2.257882e-01
+6   3.6079897   7.795367  0.46283771 6.448766e-01
+7  -0.2490578   9.010681 -0.02764028 9.780255e-01
+8   9.0910490   9.010681  1.00891916 3.163921e-01
+9  -0.2375000   3.623258 -0.06554874 9.479188e-01
+   I(day^2) 
+     Estimate Std. Error    t value     Pr(>|t|)
+1  -0.1078330 0.21135379 -0.5102012 6.114711e-01
+10 -1.7875000 3.13783338 -0.5696606 5.706811e-01
+2  -0.2181831 0.21135379 -1.0323120 3.053811e-01
+3  -0.3160449 0.08774341 -3.6019222 5.774301e-04
+4  -0.5067065 0.08774341 -5.7748668 1.815193e-07
+5  -0.5911635 0.42289761 -1.3978880 1.664386e-01
+6  -0.2970545 0.42289761 -0.7024265 4.846780e-01
+7  -0.1654837 0.49321778 -0.3355185 7.382097e-01
+8  -0.4654052 0.49321778 -0.9436098 3.485247e-01
+9          NA         NA         NA           NA
+
+Residual standard error: 14.49303 on 72 degrees of freedom
+
+> ## Error in `[<-`(`*tmp*`, use, use, ii, value = lst[[ii]]) : 
+> ##   subscript out of bounds
+> 
+> ## same bug: unused factor levels in subgroup
+> lms2 <- lmList(pixel ~ Dog + day | Side, data = Pixel,
++                subset = !(Side == "R" & Dog == "1") & Dog %in% 1:3)
+> coef(lms2) # failed in nlme <= 3.1-155 with
+  (Intercept)     Dog2     Dog3       day
+L     1049.20 7.157143 17.60073 0.1459582
+R     1046.36       NA 25.79646 0.9048003
+> ## Error in `[<-`(`*tmp*`, i, names(coefs[[i]]), value = if (is.null(coefs[[i]])) { : 
+> ##   subscript out of bounds
+> 

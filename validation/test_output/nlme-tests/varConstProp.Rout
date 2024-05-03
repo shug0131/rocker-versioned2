@@ -1,0 +1,173 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> times <- c(0, 1, 3, 7, 14, 28, 56, 90, 120)
+> k_in  <- c(0.1, 0.15, 0.16, 0.18, 0.2)
+> lrc_in <- mean(log(k_in))
+> lrc_sd_in <- sd(log(k_in))
+> n_sample <- length(times) * 2
+> const <- c(s1 = 1,    s2 = 1)
+> prop  <- c(s1 = 0.07, s2 = 0.03)
+> const_in <- rep(const, times = c(3, 2) * n_sample)
+> prop_in  <- rep(prop,  times = c(3, 2) * n_sample)
+> 
+> pred <- as.numeric(sapply(k_in, function(k) rep(100 * exp(- k * times), each = 2)))
+> 
+> set.seed(123456L)
+> d_syn <- data.frame(
++     time  = rep(times, 5, each = 2),
++     ds    = rep(paste0("d", 1:5), each = n_sample),
++     study = rep(c("s1", "s2"), times = c(3 * n_sample, 2 * n_sample)),
++     value = rnorm(length(pred), pred, sqrt(const_in^2 + pred^2 * prop_in^2))
++ )
+> 
+> library(nlme)
+> f_nlsList <- nlsList(value ~ SSasymp(time, 0, 100, lrc) | ds,
++                      data = d_syn,
++                      start = list(lrc = -3))
+> 
+> (fm_tc_study <-
++     ## suppressWarnings( ## as the fit seems to be overparameterised
++     nlme(f_nlsList,
++          weights = varConstProp(form = ~ fitted(.) | study),
++          control = list(sigma = 1))
++     ## )
++ )
+Nonlinear mixed-effects model fit by maximum likelihood
+  Model: value ~ SSasymp(time, 0, 100, lrc) 
+  Data: d_syn 
+  Log-likelihood: -191.2221
+  Fixed: list(lrc ~ 1) 
+      lrc 
+-1.863239 
+
+Random effects:
+ Formula: lrc ~ 1 | ds
+              lrc Residual
+StdDev: 0.2563268        1
+
+Variance function:
+ Structure: Constant plus proportion of variance covariate, different strata
+ Formula: ~fitted(.) | study 
+ Parameter estimates:
+              s1         s2
+const 1.06776727 0.77664068
+prop  0.07426499 0.03234766
+Number of Observations: 90
+Number of Groups: 5 
+Warning messages:
+1: In (function (model, data = sys.frame(sys.parent()), fixed, random,  :
+  Iteration 4, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)
+2: In (function (model, data = sys.frame(sys.parent()), fixed, random,  :
+  Iteration 6, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)
+> 
+> (ints <- intervals(fm_tc_study))
+Approximate 95% confidence intervals
+
+ Fixed effects:
+        lower      est.    upper
+lrc -2.092248 -1.863239 -1.63423
+
+ Random Effects:
+  Level: ds 
+            lower      est.     upper
+sd(lrc) 0.1381524 0.2563268 0.4755865
+
+ Variance function:
+              lower       est.      upper
+const.s1 0.82269213 1.06776727 1.38584885
+const.s2 0.57956431 0.77664068 1.04073135
+prop.s1  0.05339891 0.07426499 0.09513107
+prop.s2  0.01900372 0.03234766 0.04569160
+> 
+> ## Check if intervals include input used for data generation
+> stopifnot(exprs = {
++   ints$fixed["lrc", "lower"] < lrc_in
++   ints$fixed["lrc", "upper"] > lrc_in
++   all.equal(c(
++       ints$fixed["lrc", "est."],
++       ints$reStruct$ds["sd(lrc)", "est."]),
++     c(lrc_in, lrc_sd_in), tol = 1e-2) # diff. 0.00797 seen
++   ints$varStruct[1:2, "lower"] < const
++   ints$varStruct[3:4, "lower"] < prop
++   ints$varStruct[1:2, "upper"] > const
++   ints$varStruct[3:4, "upper"] > prop
++   all.equal(
++     as.numeric(ints$varStruct[c("prop.s1", "prop.s2"), "est."]),
++     as.numeric(prop), tol =  0.15) # diff. 0.062  seen
++ })
+> 
+> ## We do not get warnings if we fix the constant part of the error model
+> fm_tc_study_CF <-
++     nlme(f_nlsList,
++          weights = varConstProp(form = ~ fitted(.) | study,
++                                 fixed = list(const = c(s1 = 1, s2 = 1))))
+> summary(fm_tc_study_CF)
+Nonlinear mixed-effects model fit by maximum likelihood
+  Model: value ~ SSasymp(time, 0, 100, lrc) 
+  Data: d_syn 
+       AIC      BIC    logLik
+  394.6433 407.1424 -192.3217
+
+Random effects:
+ Formula: lrc ~ 1 | ds
+              lrc  Residual
+StdDev: 0.2545384 0.9442278
+
+Variance function:
+ Structure: Constant plus proportion of variance covariate, different strata
+ Formula: ~fitted(.) | study 
+ Parameter estimates:
+              s1         s2
+const 1.00000000 1.00000000
+prop  0.07981882 0.03340781
+Fixed effects:  list(lrc ~ 1) 
+        Value Std.Error DF   t-value p-value
+lrc -1.861862 0.1150084 85 -16.18891       0
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-2.911265142 -0.700804630  0.007072361  0.751413570  2.229380199 
+
+Number of Observations: 90
+Number of Groups: 5 
+> (ints_cf <- intervals(fm_tc_study_CF))
+Approximate 95% confidence intervals
+
+ Fixed effects:
+        lower      est.     upper
+lrc -2.089255 -1.861862 -1.634468
+
+ Random Effects:
+  Level: ds 
+            lower      est.    upper
+sd(lrc) 0.1360495 0.2545384 0.476222
+
+ Variance function:
+             lower       est.      upper
+prop.s1 0.04983197 0.07981882 0.10980567
+prop.s2 0.01685317 0.03340781 0.04996246
+
+ Within-group standard error:
+    lower      est.     upper 
+0.7652950 0.9442278 1.1649966 
+> stopifnot(
++   all.equal(
++     as.numeric(ints_cf$varStruct[, "est."]),
++     as.numeric(prop), tol =  0.15) # diff.  0.1168  seen
++ )
+> 

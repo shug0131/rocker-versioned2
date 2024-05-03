@@ -1,0 +1,53 @@
+---
+title: "Rocker Validation"
+author: "Simon Bond"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r info}
+Sys.info()
+#.Platform
+sessionInfo()
+```
+
+## R Markdown
+
+We follow the instructions detailed [R validation](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Testing-a-Unix_002dalike-Installation)
+
+```{r basic, cache=TRUE}
+rm(list=ls())
+Sys.setenv(LC_COLLATE = "C", LC_TIME = "C", LANGUAGE = "en")
+basic_both <- tools::testInstalledBasic("both")
+basic_internet <- tools::testInstalledBasic("internet")
+```
+
+## Testing the recommended packages
+
+```{r packages, cache=TRUE, fig.show='hide'}
+Sys.setenv(TEST_MC_CORES=1)
+unlink("test_output", recursive=TRUE)
+dir.create("test_output")
+packages_base <- tools::testInstalledPackages(scope="base", outDir="test_output", errorsAreFatal = FALSE)
+packages_recommended <- tools::testInstalledPackages(scope="recommended", outDir="test_output", errorsAreFatal = FALSE)
+```
+
+Running in parallel means we don't get the command line output. 
+
+
+```{r extra, cache=TRUE}
+pkg <- "cctu"
+dir.create(file.path( "package_test_output",pkg))
+tools::testInstalledPackage(pkg, outDir=file.path("package_test_output",pkg))
+```
+
+# Summary of results
+
+The output for each set of test is zero if successful
+
+```{r summary}
+cbind(basic_both, basic_internet, packages_base, packages_recommended)
+```
+
+
+

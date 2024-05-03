@@ -1,0 +1,40 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(parallel)
+> 
+> # use the same random numbers for all values
+> set.seed(1)
+> simplify2array(mclapply(rep(4, 5), rnorm))
+           [,1]       [,2]       [,3]       [,4]       [,5]
+[1,]  0.1903774  2.9227589  1.0719210 -0.3492454 -0.5076739
+[2,]  0.2185496 -0.5879345  1.1989514  0.3465238  0.5798063
+[3,] -0.2998814  1.8168999  0.1346098  0.3504941 -0.6345776
+[4,] -0.4792028  0.3191833 -0.4746178 -2.8197196  0.3677372
+> 
+> set.seed(1)
+> simplify2array(mclapply(rep(4, 5), rnorm, mc.preschedule = FALSE,
++                 mc.set.seed = FALSE))
+           [,1]       [,2]       [,3]       [,4]       [,5]
+[1,] -0.6264538 -0.6264538 -0.6264538 -0.6264538 -0.6264538
+[2,]  0.1836433  0.1836433  0.1836433  0.1836433  0.1836433
+[3,] -0.8356286 -0.8356286 -0.8356286 -0.8356286 -0.8356286
+[4,]  1.5952808  1.5952808  1.5952808  1.5952808  1.5952808
+> 
+> proc.time()
+   user  system elapsed 
+  0.252   0.107   0.238 

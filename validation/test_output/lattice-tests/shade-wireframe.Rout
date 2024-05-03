@@ -1,0 +1,49 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library(lattice)
+> 
+> pdf("shade-wireframe.pdf")
+> 
+> classicShadePalette <- function(irr, ref, height, saturation = .9)
++ {
++     hsv(h = height, s = 1 - saturation * (1 - (1-ref)^0.5), v = irr)
++ }
+> trellis.par.set(shade.colors = list(palette = classicShadePalette))
+> wireframe(volcano, shade = TRUE)
+> 
+> ## Using makeShadePalette()
+> 
+> ## matte
+> cm.palette <- makeShadePalette(cm.colors(10), pref = 0.2)
+> trellis.par.set(shade.colors = list(palette = cm.palette))
+> wireframe(volcano, shade = TRUE)
+> 
+> ## glossy
+> cm.palette <- makeShadePalette(cm.colors(10), pref = 1.2)
+> trellis.par.set(shade.colors = list(palette = cm.palette))
+> wireframe(volcano, shade = TRUE)
+> 
+> ygb.palette <- makeShadePalette(rev(hcl.colors(12, "YlGnBu")))
+> trellis.par.set(shade.colors = list(palette = ygb.palette))
+> wireframe(volcano, shade = TRUE)
+> 
+> dev.off()
+null device 
+          1 
+> 

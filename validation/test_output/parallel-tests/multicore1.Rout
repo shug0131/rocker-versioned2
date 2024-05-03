@@ -1,0 +1,38 @@
+
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(parallel)
+> 
+> p <- parallel:::mcfork()
+> if (inherits(p, "masterProcess")) {
++     cat("I'm a child! ", Sys.getpid(), "\n")
++     parallel:::mcexit(,"I was a child")
++ }
+> cat("I'm the master\n")
+> if (inherits(p, "masterProcess")) {
++     cat("I'm a child! ", Sys.getpid(), "\n")
++     parallel:::mcexit(,"I was a child")
++ }
+I'm the master
+> unserialize(parallel:::readChildren(1.5))
+I'm a child!  87720 
+[1] "I was a child"
+> ## don't do anything here as stdin is eaten.
+> 
+> proc.time()
+   user  system elapsed 
+  0.238   0.076   0.218 
