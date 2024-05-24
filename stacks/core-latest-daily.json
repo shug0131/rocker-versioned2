@@ -73,7 +73,7 @@
         "org.opencontainers.image.description": "Docker-based image for CCTU specific use, built on versioned Rocker image."
       },
       "ENV": {
-        "CCTU_VERSION": "V0.7.6"
+        "CCTU_VERSION": "0.8.0"
       },
       "FROM": "shug0131/verse:latest-daily",
       "RUN": "/rocker_scripts/install_cctu.sh"
