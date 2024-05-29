@@ -62,7 +62,7 @@
       "FROM": "shug0131/r-ver:4.4.0",
       "ENV": {
         "S6_VERSION": "v2.1.0.2",
-        "RSTUDIO_VERSION": "2024.04.0+735",
+        "RSTUDIO_VERSION": "2024.04.1+748",
         "DEFAULT_USER": "rstudio",
         "PANDOC_VERSION": "default",
         "QUARTO_VERSION": "default"
@@ -139,7 +139,7 @@
         "org.opencontainers.image.description": "Docker-based image for CCTU specific use, built on versioned Rocker image."
       },
       "ENV": {
-        "CCTU_VERSION": "V0.7.6"
+        "CCTU_VERSION": "0.8.0"
       },
       "FROM": "shug0131/verse:4.4.0",
       "RUN": "/rocker_scripts/install_cctu.sh",
