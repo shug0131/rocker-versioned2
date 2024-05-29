@@ -20,8 +20,10 @@ apt_install \
 
 
 
-install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS"  xslt
-
+install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS"  \
+    xslt \
+    kableExtra 
+    
 R -q -e "remotes::install_github(repo=\"cam-ctu/cctu\", ref=\"$CCTU_VERSION\", INSTALL_opts=\"--install-tests\" , build_vignettes=TRUE)"
 
 
@@ -30,7 +32,6 @@ R -q -e "remotes::install_github(repo=\"cam-ctu/cctu\", ref=\"$CCTU_VERSION\", I
 #apt-get install -y --no-install-recommends  gsl-bin/ libgsl0-dev
 
 install2.r --error  --skipmissing --deps TRUE --skipinstalled -n "$NCPUS" \
-    kableExtra \
     reshape2 \
     mvtnorm \
     ggalluvial \
