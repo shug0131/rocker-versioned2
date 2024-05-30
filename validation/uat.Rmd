@@ -11,7 +11,22 @@ Sys.info()
 sessionInfo()
 ```
 
-## R Markdown
+# Background
+
+
+R is an open source and free software environment for statistical computing and graphics.
+
+It can be readily downloaded from [CRAN](http://cran.ma.imperial.ac.uk/)or other mirror sites.
+
+We have moved to using a Docker image based on the [Rocker Project](https://rocker-project.org/), rather than each individual user directly installing onto hardware. This standardises the virtual operating system, details of installation, and set of add-on packages, along with the dates/versions of software being the most recent version available on the day preceding each release of the main R software. Our policy is to use the last-but-one version of R.  See the [repository](https://github.com/shug0131/rocker-versioned2) for the files used to build the images, and the [dockerhub](https://hub.docker.com/r/shug0131/cctu) for the raw image files.  We do not need to test the docker desktop, or the image files from an end user perspective to validate the R software; rather we take a running docker container as the installation, and then run the standard set of installation tests to demonstrate that R has been installed correctly.
+
+
+
+A position paper on its ability to meet FDA and EME regulatory requirements for Clinical Trials  is provided in the R-FDA.pdf appendix and the R-SDLC.pdf gives an overview of the development cycle.
+Internal tools are provided to check that an installation is successful. These function by running pre-written scripts to a) check that they run without errors b) the output that is produced matches up to pre-saved output files supplied with the download.
+
+
+# R Basic Validation
 
 We follow the instructions detailed [R validation](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Testing-a-Unix_002dalike-Installation)
 
@@ -19,15 +34,37 @@ We follow the instructions detailed [R validation](https://cran.r-project.org/do
 Running from the command line directly
 
 ```{bash, cmd-tests , cache=TRUE}
+VALID_DIR=$PWD
 cd $R_HOME/tests
 sudo chmod a+rwx -R .
 ../bin/R CMD make check
 ../bin/R CMD make check-devel
 ../bin/R CMD make check-all
 ../bin/R CMD make test-BasePackages
-../bin/R CMD make test-Recommended 
+../bin/R CMD make test-Recommended
+rm -r $VALID_DIR/test_output
+mkdir $VALID_DIR/test_output
+cp -r -f $R_HOME/tests/* $VALID_DIR/test_output
 ```
 
+The resulting files are saved in the directory [test_output](./test_output) .
 
+
+# Contributed Add-on Packages
+
+Since R is Open Source, contributed packages can be developed by anyone. Therefore, ensuring the accuracy of each contributed package used is necessary [R Validation Hub](https://www.pharmar.org/overview/) .
+
+Most packages are available from [CRAN](https://cran.r-project.org/) where to be published they must satisfy a set of 
+checks, including the unit-testing provided by the authors. The checks are run daily. Hence we look up the result for the package version/date used in the docker image.  However this is to check internal consistency, rather than to check the actual quality of the code.  
+
+An in-house package `cctu` is provided on [github](https://github.com/cam-ctu/cctu) and is not on CRAN, so we directly run the checks below
+
+```{r, cctu_check}
+pkg <- "cctu"
+dir.create(file.path("validation","package_test_output",pkg))
+tools::testInstalledPackage(pkg, outDir=file.path("validation","package_test_output",pkg))
+```
+
+We look up the results of the CRAN check for each other package
 
 

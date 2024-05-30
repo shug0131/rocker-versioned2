@@ -53,6 +53,30 @@ tools::testInstalledPackage(pkg, outDir=file.path("validation","package_test_out
 # Need to have installed the package with R CMD INSTALL --install-tests to have the 
 # test files . But these should be checked within CRAN - so could just pull them from internet. 
 # Might need to tweak how cctu is installed, and any other non-public packages.
+library(tidyverse)
+library(rvest)
+
+pks <- library()$results %>%
+  as.data.frame %>%  
+  filter( LibPath=="/usr/local/lib/R/site-library", Package!="cctu") %>% 
+  pull(Package)
+
+url <- paste0("https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/",pks,"-00check.html")
+status <- rep(NA, length(url))
+for( i in 1:length(url)){
+  status[i] <- read_html(url[i]) %>% 
+    html_element("p") %>% 
+    html_text %>% 
+    gsub("\\nStatus:","",.) %>% 
+    gsub("\\n","",.)
+}
+
+link <- paste0("<a href=\"",url,"\">",pks,"</a>" )
+
+knitr::kable(cbind(link, status ),
+             format="html",
+             escape=FALSE)
+             
 
 # Do the risk assessment tools
 
