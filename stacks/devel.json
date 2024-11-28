@@ -49,7 +49,7 @@
       "FROM": "shug0131/r-ver:devel",
       "ENV": {
         "S6_VERSION": "v2.1.0.2",
-        "RSTUDIO_VERSION": "2024.09.0+375",
+        "RSTUDIO_VERSION": "2024.09.1+394",
         "DEFAULT_USER": "rstudio",
         "PANDOC_VERSION": "default",
         "QUARTO_VERSION": "default"
