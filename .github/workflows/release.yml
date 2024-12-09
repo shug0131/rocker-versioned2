@@ -13,12 +13,12 @@ jobs:
     outputs:
       tag: ${{ steps.tag-version.outputs.new_tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
 
       - id: set-version
         run: |
-          NEW_VERSION=$(jq '.r_version[-1]' -r build/matrix/latest.json)
-          echo ::set-output name=newversion::"${NEW_VERSION}"
+          NEW_VERSION="$(jq '.r_version[-1]' -r build/matrix/latest.json)"
+          echo "newversion=${NEW_VERSION}" >>"$GITHUB_OUTPUT"
           echo "${NEW_VERSION}"
 
       - name: Bump version and push tag
@@ -34,7 +34,7 @@ jobs:
     needs: create_tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:

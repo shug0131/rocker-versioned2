@@ -25,20 +25,24 @@ jobs:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      all-versions: ${{ steps.set-json.outputs.all-versions }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - id: set-json
         run: |
           JSON=build/matrix/latest.json
+          ALL=false
           if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
             JSON=build/matrix/all.json
+            ALL=true
           fi
-          echo json=${JSON} >> $GITHUB_OUTPUT
+          echo "json=${JSON}" >>"$GITHUB_OUTPUT"
+          echo "all-versions=${ALL}" >>"$GITHUB_OUTPUT"
           echo ${JSON}
       - id: set-matrix
         run: |
           CONTENT=$(jq -r 'tostring' ${{ steps.set-json.outputs.json }})
-          echo matrix="${CONTENT}" >> $GITHUB_OUTPUT
+          echo "matrix=${CONTENT}" >>"$GITHUB_OUTPUT"
           echo "${CONTENT}"
 
 #          echo ::set-output name=json::${JSON}
@@ -52,25 +56,33 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Build and push Docker images
         run: |
           BAKE_JSON=bakefiles/${{ matrix.r_version }}.docker-bake.json \
           BAKE_GROUP=${{ matrix.group }} \
           BAKE_OPTION=--push \
           make bake-json-group
+
+  call-extra-workflow:
+    needs:
+      - generate_matrix
+      - build
+    uses: ./.github/workflows/extra.yml
+    with:
+      all-versions: ${{ needs.generate_matrix.outputs.all-versions == 'true' }}

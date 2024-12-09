@@ -23,11 +23,11 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - id: set-matrix
         run: |
           CONTENT=$(jq 'tostring' -r tests/rocker_scripts/matrix.json)
-          echo ::set-output name=matrix::"${CONTENT}"
+          echo "matrix=${CONTENT}" >> "$GITHUB_OUTPUT"
           echo "${CONTENT}"
 
   build:
@@ -37,15 +37,15 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Prepare build
         id: prep
         run: |
           lower_script_name=$(echo ${{ matrix.script_name }} | tr '[:upper:]' '[:lower:]')
           test_name="${{ matrix.base_image }}-${{ matrix.tag }}-${lower_script_name}-${{ matrix.script_arg }}"
-          echo ::set-output name=output_tag::"${test_name/"/"/"-"}"
+          echo "output_tag=${test_name/"/"/"-"}" >>"$GITHUB_OUTPUT"
       - name: test build
         run: |
           docker buildx build . -f tests/rocker_scripts/Dockerfile \

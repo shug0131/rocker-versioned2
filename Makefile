@@ -1,13 +1,15 @@
 SHELL := /bin/bash
 
-.PHONY: clean setup test print-% pull-image% bake-json% inspect-% report% wiki%
+.PHONY: clean test print-% pull-image% bake-json% inspect-% report% wiki%
 
 all:
 
+.PHONY: setup
 setup:
-	./build/make-dockerfiles.R
-	./build/make-bakejson.R
-	./build/make-matrix.R
+	Rscript build/scripts/generate-matrix.R
+	Rscript build/scripts/generate-bakefiles.R
+	Rscript build/scripts/generate-dockerfiles.R
+	Rscript build/scripts/clean-files.R
 
 test: bake-json-test-all bake-json-test-groups
 
@@ -46,7 +48,7 @@ BAKE_OPTION ?= --print
 bake-json/%:
 	docker buildx bake -f $(BAKE_JSON) --set=*.labels.org.opencontainers.image.revision=$(IMAGE_REVISION) $(BAKE_OPTION) $*
 bake-json-all: $(foreach I, $(shell jq '.target | keys_unsorted | .[]' -r $(BAKE_JSON)), bake-json/$(I))
-bake-json-group: $(foreach I, $(shell jq '.group[].$(BAKE_GROUP)[].targets[]' -r $(BAKE_JSON)), bake-json/$(I))
+bake-json-group: $(foreach I, $(shell jq '.group[]."$(BAKE_GROUP)"[].targets[]' -r $(BAKE_JSON)), bake-json/$(I))
 
 
 # Inspect R container images by `make inspect-image-all` and generate reports about them by `make report-all`.
@@ -54,7 +56,6 @@ REPORT_SOURCE_ROOT ?= tmp/inspects
 IMAGELIST_DIR ?= tmp/imagelist
 IMAGELIST_NAME ?= imagelist.tsv
 REPORT_DIR ?= reports
-STACK_FILES ?= $(wildcard stacks/*.json)
 IMAGE_FILTER ?= label=org.opencontainers.image.source=$(IMAGE_SOURCE)
 inspect-image/%:
 	mkdir -p $(REPORT_SOURCE_ROOT)/$*
@@ -80,8 +81,8 @@ wiki-home: $(REPORT_DIR)/Versions.md $(REPORT_DIR)/_Sidebar.md
 	Rscript -e 'rmarkdown::render(input = "build/reports/wiki_home.Rmd", output_dir = "$(REPORT_DIR)", output_file = "Home.md")'
 $(REPORT_DIR)/_Sidebar.md: build/reports/_Sidebar.md
 	cp $< $@
-$(REPORT_DIR)/Versions.md: build/reports/versions.Rmd $(STACK_FILES)
+$(REPORT_DIR)/Versions.md: build/reports/versions.Rmd build/args/history.tsv
 	-Rscript -e 'rmarkdown::render(input = "$<", output_dir = "$(@D)", output_file = "$(@F)")'
 
 clean:
-	rm -r -f dockerfiles/*.Dockerfile bakefiles/*.json tmp/*
+	rm -r -f tmp/*

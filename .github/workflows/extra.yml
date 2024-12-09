@@ -1,25 +1,51 @@
 name: Build & Push extra images
 
+# TODO: reconsider the triggers
 on:
-#  schedule:
-#    - cron: "0 0 1 * *"
+  workflow_call:
+    inputs:
+      all-versions:
+        type: boolean
+        default: false
+      group:
+        type: string
+        required: false
   workflow_dispatch:
+    inputs:
+      all-versions:
+        description: Build all versions
+        type: boolean
+        default: false
+      group:
+        description: Build a specific group
+        type: string
+        required: false
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+# TODO: reconsider <https://github.com/github/vscode-github-actions/issues/135>
+# concurrency:
+#   group: ${{ github.workflow }}
+#   cancel-in-progress: true
 
 jobs:
   generate_matrix:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
       - id: set-matrix
         run: |
-          CONTENT=$(jq '{ group: [.group[] | keys[] | select(. != "default")] } | tostring' -r bakefiles/extra.docker-bake.json)
-          echo ::set-output name=matrix::"${CONTENT}"
+          JSON="build/matrix/latest.json"
+          if [[ "${{ inputs.all-versions }}" == "true" ]]; then
+            JSON="build/matrix/latest-two.json"
+          fi
+          if [[ -z "${{ inputs.group }}" ]]; then
+            CONTENT="$(jq -s -r '.[0] + { group: [.[1].group[] | keys[] | select(. != "default")] } | tostring' $JSON build/templates/bakefiles/extra.docker-bake.json)"
+          else
+            CONTENT="$(jq -r '.group = ["${{ inputs.group }}"] | tostring' $JSON)"
+          fi
+          echo "matrix=${CONTENT}" >>"$GITHUB_OUTPUT"
           echo "${CONTENT}"
 
   build:
@@ -29,24 +55,28 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.4
+      - name: Clean up
+        run: |
+          docker image prune --all --force
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Build and push Docker images
         run: |
-          BAKE_JSON=bakefiles/extra.docker-bake.json \
+          BAKE_JSON=bakefiles/${{ matrix.r_version }}.extra.docker-bake.json \
           BAKE_GROUP=${{ matrix.group }} \
           BAKE_OPTION=--push \
           make bake-json-group

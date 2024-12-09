@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [[ -x "/usr/bin/latex" ]]; then
+    echo "texlive already installed"
+    exit 0
+fi
+
 CTAN_REPO=${1:-${CTAN_REPO:-"https://mirror.ctan.org/systems/texlive/tlnet"}}
 
 ARCH=$(uname -m)
@@ -62,6 +67,7 @@ tlmgr install \
     collection-latexrecommended \
     collection-fontsextra \
     collection-latexextra \
+    bookmark \
     context \
     ec \
     epstopdf-pkg \
@@ -77,6 +83,7 @@ tlmgr install \
     infwarerr \
     intcalc \
     koma-script \
+    koma-script \
     kvdefinekeys \
     kvoptions \
     kvsetkeys \
@@ -84,6 +91,7 @@ tlmgr install \
     listings \
     ltxcmds \
     makeindex \
+    mdwtools \
     mdwtools \
     metafont \
     mfware \
@@ -95,6 +103,7 @@ tlmgr install \
     rerunfilecheck \
     stringenc \
     tex \
+    tikzfill \
     tikzfill \
     tools \
     uniquecounter \
